@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.chrosciu.Direction.VERTICAL;
 import static com.chrosciu.Result.FINISHED;
 import static com.chrosciu.Result.HIT;
 import static com.chrosciu.Result.MISSED;
@@ -30,7 +31,7 @@ public class Shooter {
         for (Ship ship: ships) {
             List<FieldWithHitMark> shipWithHitMarks = new ArrayList<>();
             for (int shift = 0; shift < ship.getLength(); ++shift) {
-                if (ship.isVertical()) {
+                if (VERTICAL.equals(ship.getDirection())) {
                     shipWithHitMarks.add(FieldWithHitMark.from(Field.of(ship.getFirstField().getX(), ship.getFirstField().getY() + shift)));
                 } else {
                     shipWithHitMarks.add(FieldWithHitMark.from(Field.of(ship.getFirstField().getX() + shift, ship.getFirstField().getY())));

@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.chrosciu.Direction.HORIZONTAL;
+import static com.chrosciu.Direction.VERTICAL;
 import static com.chrosciu.Result.HIT;
 import static com.chrosciu.Result.MISSED;
 import static com.chrosciu.Result.SUNK;
@@ -24,9 +26,6 @@ public class ShooterTest {
 
     private static final Field FIELD_WITHOUT_SHIP = Field.of(1, 2);
     private static final Field ANOTHER_FIELD_WITHOUT_SHIP = Field.of(4, 4);
-
-    private static final boolean VERTICAL = true;
-    private static final boolean HORIZONTAL = false;
 
     private static final int ONE_FIELD_SHIP_SIZE = 1;
     private static final int TWO_FIELDS_SHIP_SIZE = 2;
