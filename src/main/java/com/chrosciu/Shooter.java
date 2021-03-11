@@ -3,8 +3,10 @@ package com.chrosciu;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.chrosciu.Result.FINISHED;
 import static com.chrosciu.Result.HIT;
@@ -24,24 +26,22 @@ public class Shooter {
         }
     }
 
-    private final List<List<FieldWithHitMark>> shipsWitHitMarks = new ArrayList<>();
+    private final List<List<FieldWithHitMark>> shipsWitHitMarks;
 
     public Shooter(List<Ship> ships) {
-        for (Ship ship: ships) {
-            List<FieldWithHitMark> shipWithHitMarks = new ArrayList<>();
-            for (int j = 0; j < ship.getLength(); ++j) {
-                shipWithHitMarks.add(FieldWithHitMark.from(ship.getFirstField().shiftInDirection(ship.getDirection(), j)));
-            }
-            shipsWitHitMarks.add(shipWithHitMarks);
-        }
+        shipsWitHitMarks = ships.stream()
+                .map(ship -> IntStream.range(0, ship.getLength())
+                        .mapToObj(shift -> FieldWithHitMark.from(ship.getFirstField().shiftInDirection(ship.getDirection(), shift)))
+                        .collect(Collectors.toList()))
+                .collect(Collectors.toList());
     }
 
     public Result takeShot(Field field) {
         Result result = MISSED;
         for (List<FieldWithHitMark> shipWithHitMarks: shipsWitHitMarks) {
-            FieldWithHitMark fieldWithHitMark = findGivenFieldInGivenShip(field, shipWithHitMarks);
-            if (fieldWithHitMark != null) {
-                fieldWithHitMark.markAsHit();
+            Optional<FieldWithHitMark> fieldWithHitMark = findGivenFieldInGivenShip(field, shipWithHitMarks);
+            if (fieldWithHitMark.isPresent()) {
+                fieldWithHitMark.get().markAsHit();
                 result = HIT;
                 if (checkIfAllShipFieldsAreHit(shipWithHitMarks)) {
                     result = SUNK;
@@ -55,31 +55,17 @@ public class Shooter {
         return result;
     }
 
-    private FieldWithHitMark findGivenFieldInGivenShip(Field field, List<FieldWithHitMark> shipWithHitMarks) {
-        for (FieldWithHitMark fieldWithHitMark: shipWithHitMarks) {
-            if (fieldWithHitMark.getField().equals(field)) {
-                return fieldWithHitMark;
-            }
-        }
-        return null;
+    private Optional<FieldWithHitMark> findGivenFieldInGivenShip(Field field, List<FieldWithHitMark> shipWithHitMarks) {
+        return shipWithHitMarks.stream()
+                .filter(fieldWithHitMark -> fieldWithHitMark.getField().equals(field))
+                .findFirst();
     }
 
     private boolean checkIfAllShipFieldsAreHit(List<FieldWithHitMark> shipWithHitMarks) {
-        boolean allShipFieldsHit = true;
-        for (int j = 0; j < shipWithHitMarks.size() && allShipFieldsHit; ++j) {
-            allShipFieldsHit &= shipWithHitMarks.get(j).isHit();
-        }
-        return allShipFieldsHit;
+        return shipWithHitMarks.stream().allMatch(FieldWithHitMark::isHit);
     }
 
     private boolean checkIfAllShipsAreSunk() {
-        boolean allShipsSunk = true;
-        for (int i = 0; i < shipsWitHitMarks.size() && allShipsSunk; ++i) {
-            List<FieldWithHitMark> shipWithHitMarks = shipsWitHitMarks.get(i);
-            for (int j = 0; j < shipWithHitMarks.size() && allShipsSunk; ++j) {
-                allShipsSunk &= shipWithHitMarks.get(j).isHit();
-            }
-        }
-        return allShipsSunk;
+        return shipsWitHitMarks.stream().allMatch(this::checkIfAllShipFieldsAreHit);
     }
 }
