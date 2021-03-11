@@ -11,10 +11,10 @@ import java.util.Scanner;
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
-        List<Triple<Pair<Integer, Integer>, Integer, Boolean>> rv = new ArrayList<>();
+        List<Triple<Field, Integer, Boolean>> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Triple.of(Pair.of(1, 1), 4, true));
-        rv.add(Triple.of(Pair.of(6, 7), 2, false));
+        rv.add(Triple.of(Field.of(1, 1), 4, true));
+        rv.add(Triple.of(Field.of(6, 7), 2, false));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            int r = shooter.shoot(Pair.of(a, b));
+            int r = shooter.shoot(Field.of(a, b));
             System.out.println(r);
             //if all ships sunk finish the game
             if (3 == r) {
