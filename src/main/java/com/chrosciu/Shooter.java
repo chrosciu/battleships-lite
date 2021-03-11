@@ -1,7 +1,7 @@
 package com.chrosciu;
 
-
-import org.apache.commons.lang3.tuple.MutablePair;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,19 @@ import static com.chrosciu.Result.SUNK;
 
 public class Shooter {
 
-    private List<List<MutablePair<Field, Boolean>>> data = new ArrayList<>();
+    @Getter
+    @RequiredArgsConstructor(staticName = "from")
+    static class FieldWithHitMark {
+        private final Field field;
+        private boolean hit;
+
+        void markAsHit() {
+            this.hit = true;
+        }
+
+    }
+
+    private final List<List<FieldWithHitMark>> shipsWitHitMarks = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -24,15 +36,15 @@ public class Shooter {
      */
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<MutablePair<Field, Boolean>> list = new ArrayList<>();
+            List<FieldWithHitMark> shipWithHitMarks = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {
                 if (VERTICAL == input.get(i).getDirection()) {
-                    list.add(MutablePair.of(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j), false));
+                    shipWithHitMarks.add(FieldWithHitMark.from(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
                 } else {
-                    list.add(MutablePair.of(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY()), false));
+                    shipWithHitMarks.add(FieldWithHitMark.from(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
                 }
             }
-            data.add(list);
+            shipsWitHitMarks.add(shipWithHitMarks);
         }
     }
 
@@ -45,12 +57,12 @@ public class Shooter {
     public Result shoot(Field field) {
         Result result = MISSED;
         //iterate through all ships
-        for (int i = 0; i < data.size() && MISSED == result; ++i) {
+        for (int i = 0; i < shipsWitHitMarks.size() && MISSED == result; ++i) {
             //iterate through all ship fields
-            for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
+            for (int j = 0; j < shipsWitHitMarks.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getLeft().getX() == field.getX() && data.get(i).get(j).getLeft().getY() == field.getY()) {
-                    data.get(i).get(j).setRight(true);
+                if (shipsWitHitMarks.get(i).get(j).getField().equals(field)) {
+                    shipsWitHitMarks.get(i).get(j).markAsHit();
                     result = HIT;
                 }
             }
@@ -58,8 +70,8 @@ public class Shooter {
             if (HIT == result) {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
-                for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).getRight();
+                for (int j = 0; j < shipsWitHitMarks.get(i).size() && a; ++j) {
+                    a &= shipsWitHitMarks.get(i).get(j).isHit();
                 }
                 if (a) {
                     result = SUNK;
@@ -68,9 +80,9 @@ public class Shooter {
         }
         //check if all ships are sunk
         boolean a = true;
-        for (int i = 0; i < data.size() && a; ++i) {
-            for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).getRight();
+        for (int i = 0; i < shipsWitHitMarks.size() && a; ++i) {
+            for (int j = 0; j < shipsWitHitMarks.get(i).size() && a; ++j) {
+                a &= shipsWitHitMarks.get(i).get(j).isHit();
             }
         }
         if (a) {
