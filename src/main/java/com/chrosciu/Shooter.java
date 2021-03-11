@@ -18,14 +18,14 @@ public class Shooter {
      * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Triple<Field, Integer, Boolean>> input) {
+    public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<MutablePair<Field, Boolean>> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getMiddle(); ++j) {
-                if (input.get(i).getRight()) {
-                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
+            for (int j = 0; j < input.get(i).getLength(); ++j) {
+                if (input.get(i).isVertical()) {
+                    list.add(MutablePair.of(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY()), false));
                 }
             }
             data.add(list);
