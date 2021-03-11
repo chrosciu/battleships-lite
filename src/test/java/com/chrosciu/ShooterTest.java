@@ -48,67 +48,67 @@ public class ShooterTest {
         Shooter shooter = new Shooter(SHIPS);
 
         //when
-        Result result = shooter.shoot(FIELD_WITHOUT_SHIP);
+        Result result = shooter.takeShot(FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(MISSED, result);
 
         //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = shooter.takeShot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(HIT, result);
 
         //when
-        result = shooter.shoot(ONE_FIELD_SHIP_FIELD);
+        result = shooter.takeShot(ONE_FIELD_SHIP_FIELD);
 
         //then
         assertEquals(SUNK, result);
 
         //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = shooter.takeShot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(HIT, result);
 
         //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = shooter.takeShot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
         assertEquals(SUNK, result);
 
         //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = shooter.takeShot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
         assertEquals(SUNK, result);
 
         //when
-        result = shooter.shoot(ANOTHER_ONE_FIELD_SHIP_FIELD);
+        result = shooter.takeShot(ANOTHER_ONE_FIELD_SHIP_FIELD);
 
         //then
         assertEquals(SUNK, result);
 
         //when
-        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = shooter.takeShot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(HIT, result);
 
         //when
-        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = shooter.takeShot(HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
         assertEquals(FINISHED, result);
 
         //when
-        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = shooter.takeShot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(FINISHED, result);
 
         //when
-        result = shooter.shoot(ANOTHER_FIELD_WITHOUT_SHIP);
+        result = shooter.takeShot(ANOTHER_FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(FINISHED, result);
