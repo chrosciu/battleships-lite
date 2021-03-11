@@ -22,37 +22,24 @@ public class Shooter {
         void markAsHit() {
             this.hit = true;
         }
-
     }
 
     private final List<List<FieldWithHitMark>> shipsWitHitMarks = new ArrayList<>();
 
-    /**
-     * Initialize shooter with given list of ships on board
-     *
-     * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
-     *              (true - vertical, false - horizontal)
-     */
-    public Shooter(List<Ship> input) {
-        for (int i = 0; i < input.size(); ++i) {
+    public Shooter(List<Ship> ships) {
+        for (int i = 0; i < ships.size(); ++i) {
             List<FieldWithHitMark> shipWithHitMarks = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getLength(); ++j) {
-                if (input.get(i).isVertical()) {
-                    shipWithHitMarks.add(FieldWithHitMark.from(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
+            for (int j = 0; j < ships.get(i).getLength(); ++j) {
+                if (ships.get(i).isVertical()) {
+                    shipWithHitMarks.add(FieldWithHitMark.from(Field.of(ships.get(i).getFirstField().getX(), ships.get(i).getFirstField().getY() + j)));
                 } else {
-                    shipWithHitMarks.add(FieldWithHitMark.from(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
+                    shipWithHitMarks.add(FieldWithHitMark.from(Field.of(ships.get(i).getFirstField().getX() + j, ships.get(i).getFirstField().getY())));
                 }
             }
             shipsWitHitMarks.add(shipWithHitMarks);
         }
     }
 
-    /**
-     * Take shot for given field and return shot result
-     *
-     * @param field - field coordinates
-     * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
-     */
     public Result shoot(Field field) {
         Result result = MISSED;
         //iterate through all ships
@@ -68,23 +55,23 @@ public class Shooter {
             //if ship is hit - check if it is sunk
             if (HIT == result) {
                 //iterate through all fields and check if they are all hit
-                boolean a = true;
-                for (int j = 0; j < shipsWitHitMarks.get(i).size() && a; ++j) {
-                    a &= shipsWitHitMarks.get(i).get(j).isHit();
+                boolean isSunk = true;
+                for (int j = 0; j < shipsWitHitMarks.get(i).size() && isSunk; ++j) {
+                    isSunk &= shipsWitHitMarks.get(i).get(j).isHit();
                 }
-                if (a) {
+                if (isSunk) {
                     result = SUNK;
                 }
             }
         }
         //check if all ships are sunk
-        boolean a = true;
-        for (int i = 0; i < shipsWitHitMarks.size() && a; ++i) {
-            for (int j = 0; j < shipsWitHitMarks.get(i).size() && a; ++j) {
-                a &= shipsWitHitMarks.get(i).get(j).isHit();
+        boolean isFinished = true;
+        for (int i = 0; i < shipsWitHitMarks.size() && isFinished; ++i) {
+            for (int j = 0; j < shipsWitHitMarks.get(i).size() && isFinished; ++j) {
+                isFinished &= shipsWitHitMarks.get(i).get(j).isHit();
             }
         }
-        if (a) {
+        if (isFinished) {
             result = FINISHED;
         }
         return result;

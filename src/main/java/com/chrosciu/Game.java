@@ -8,25 +8,19 @@ import static com.chrosciu.Result.FINISHED;
 
 public class Game {
     public static void main(String[] args) {
-        //create empty ship list...
-        List<Ship> rv = new ArrayList<>();
-        //... and fill it with ships placed on board
-        rv.add(Ship.of(Field.of(1, 1), 4, true));
-        rv.add(Ship.of(Field.of(6, 7), 2, false));
-        //let's start the game
-        Shooter shooter = new Shooter(rv);
+        List<Ship> ships = new ArrayList<>();
+        ships.add(Ship.of(Field.of(1, 1), 4, true));
+        ships.add(Ship.of(Field.of(6, 7), 2, false));
+        Shooter shooter = new Shooter(ships);
         Scanner keyboard = new Scanner(System.in);
-        //read user shots
         for (;;) {
-            //read field coordinates...
-            System.out.println("enter a");
-            int a = keyboard.nextInt();
-            System.out.println("enter b");
-            int b = keyboard.nextInt();
-            //... and take shot !
-            Result result = shooter.shoot(Field.of(a, b));
-            System.out.println(result);
-            //if all ships sunk finish the game
+            System.out.println("Enter field coordinates");
+            System.out.println("X:");
+            int x = keyboard.nextInt();
+            System.out.println("Y:");
+            int y = keyboard.nextInt();
+            Result result = shooter.shoot(Field.of(x, y));
+            System.out.println(String.format("Result: %s", result));
             if (FINISHED == result) {
                 break;
             }
