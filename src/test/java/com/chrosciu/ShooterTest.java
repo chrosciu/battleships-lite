@@ -6,6 +6,10 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.chrosciu.Result.HIT;
+import static com.chrosciu.Result.MISSED;
+import static com.chrosciu.Result.SUNK;
+import static com.chrosciu.Result.FINISHED;
 import static org.junit.Assert.assertEquals;
 
 public class ShooterTest {
@@ -39,18 +43,13 @@ public class ShooterTest {
     private static final List<Triple<Field, Integer, Boolean>> SHIPS =
             Arrays.asList(VERTICAL_TWO_FIELDS_SHIP, ONE_FIELD_SHIP, ANOTHER_ONE_FIELD_SHIP, HORIZONTAL_TWO_FIELDS_SHIP);
 
-    private static final int MISSED = 0;
-    private static final int HIT = 1;
-    private static final int SUNK = 2;
-    private static final int FINISHED = 3;
-
     @Test
     public void shouldProperlyCalculateShootResultForGivenSetofShipsOnBoard() {
         //given
         Shooter shooter = new Shooter(SHIPS);
 
         //when
-        int result = shooter.shoot(FIELD_WITHOUT_SHIP);
+        Result result = shooter.shoot(FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(MISSED, result);
