@@ -36,27 +36,43 @@ public class Shooter {
         }
     }
 
-    public Result shoot(Field field) {
+    public Result takeShot(Field field) {
         Result result = MISSED;
-        for (int i = 0; i < shipsWitHitMarks.size() && MISSED == result; ++i) {
-            List<FieldWithHitMark> shipWithHitMarks = shipsWitHitMarks.get(i);
-            for (int j = 0; j < shipWithHitMarks.size() && MISSED == result; ++j) {
-                FieldWithHitMark fieldWithHitMark = shipWithHitMarks.get(j);
-                if (fieldWithHitMark.getField().equals(field)) {
-                    fieldWithHitMark.markAsHit();
-                    result = HIT;
-                }
-            }
-            if (HIT == result) {
-                boolean allShipFieldsHit = true;
-                for (int j = 0; j < shipWithHitMarks.size() && allShipFieldsHit; ++j) {
-                    allShipFieldsHit &= shipWithHitMarks.get(j).isHit();
-                }
-                if (allShipFieldsHit) {
+        for (List<FieldWithHitMark> shipWithHitMarks: shipsWitHitMarks) {
+            FieldWithHitMark fieldWithHitMark = findGivenFieldInGivenShip(field, shipWithHitMarks);
+            if (fieldWithHitMark != null) {
+                fieldWithHitMark.markAsHit();
+                result = HIT;
+                if (checkIfAllShipFieldsAreHit(shipWithHitMarks)) {
                     result = SUNK;
                 }
+                break;
             }
         }
+        if (checkIfAllShipsAreSunk()) {
+            result = FINISHED;
+        }
+        return result;
+    }
+
+    private FieldWithHitMark findGivenFieldInGivenShip(Field field, List<FieldWithHitMark> shipWithHitMarks) {
+        for (FieldWithHitMark fieldWithHitMark: shipWithHitMarks) {
+            if (fieldWithHitMark.getField().equals(field)) {
+                return fieldWithHitMark;
+            }
+        }
+        return null;
+    }
+
+    private boolean checkIfAllShipFieldsAreHit(List<FieldWithHitMark> shipWithHitMarks) {
+        boolean allShipFieldsHit = true;
+        for (int j = 0; j < shipWithHitMarks.size() && allShipFieldsHit; ++j) {
+            allShipFieldsHit &= shipWithHitMarks.get(j).isHit();
+        }
+        return allShipFieldsHit;
+    }
+
+    private boolean checkIfAllShipsAreSunk() {
         boolean allShipsSunk = true;
         for (int i = 0; i < shipsWitHitMarks.size() && allShipsSunk; ++i) {
             List<FieldWithHitMark> shipWithHitMarks = shipsWitHitMarks.get(i);
@@ -64,9 +80,6 @@ public class Shooter {
                 allShipsSunk &= shipWithHitMarks.get(j).isHit();
             }
         }
-        if (allShipsSunk) {
-            result = FINISHED;
-        }
-        return result;
+        return allShipsSunk;
     }
 }

@@ -21,7 +21,7 @@ public class Game {
             int x = keyboard.nextInt();
             System.out.println("Y:");
             int y = keyboard.nextInt();
-            Result result = shooter.shoot(Field.of(x, y));
+            Result result = shooter.takeShot(Field.of(x, y));
             System.out.println(String.format("Result: %s", result));
             if (FINISHED == result) {
                 break;
