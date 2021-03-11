@@ -6,6 +6,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.chrosciu.Direction.VERTICAL;
 import static com.chrosciu.Result.FINISHED;
 import static com.chrosciu.Result.HIT;
 import static com.chrosciu.Result.MISSED;
@@ -25,7 +26,7 @@ public class Shooter {
         for (int i = 0; i < input.size(); ++i) {
             List<MutablePair<Field, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {
-                if (input.get(i).isVertical()) {
+                if (VERTICAL == input.get(i).getDirection()) {
                     list.add(MutablePair.of(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j), false));
                 } else {
                     list.add(MutablePair.of(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY()), false));

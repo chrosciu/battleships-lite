@@ -6,5 +6,5 @@ import lombok.Value;
 public class Ship {
     Field firstField;
     int length;
-    boolean vertical;
+    Direction direction;
 }

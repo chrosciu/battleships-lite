@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.chrosciu.Direction.HORIZONTAL;
+import static com.chrosciu.Direction.VERTICAL;
 import static com.chrosciu.Result.FINISHED;
 
 public class Game {
@@ -11,8 +13,8 @@ public class Game {
         //create empty ship list...
         List<Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Ship.of(Field.of(1, 1), 4, true));
-        rv.add(Ship.of(Field.of(6, 7), 2, false));
+        rv.add(Ship.of(Field.of(1, 1), 4, VERTICAL));
+        rv.add(Ship.of(Field.of(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
