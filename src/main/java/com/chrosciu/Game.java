@@ -6,15 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.chrosciu.Orientation.HORIZONTAL;
+import static com.chrosciu.Orientation.VERTICAL;
 import static com.chrosciu.Result.FINISHED;
 
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
-        List<Triple<Field, Integer, Boolean>> rv = new ArrayList<>();
+        List<Triple<Field, Integer, Orientation>> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Triple.of(Field.of(1, 1), 4, true));
-        rv.add(Triple.of(Field.of(6, 7), 2, false));
+        rv.add(Triple.of(Field.of(1, 1), 4, VERTICAL));
+        rv.add(Triple.of(Field.of(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
