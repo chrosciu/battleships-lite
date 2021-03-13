@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.chrosciu.Result.FINISHED;
+
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
@@ -24,10 +26,9 @@ public class Game {
             System.out.println("enter y coordinate: ");
             int yCoordinate = keyboard.nextInt();
             //... and take shot !
-            int r = shooter.shoot(Field.of(xCoordinate, yCoordinate));
+            Result r = shooter.shoot(Field.of(xCoordinate, yCoordinate));
             System.out.println(r);
-            //if all ships sunk finish the game
-            if (3 == r) {
+            if (FINISHED == r) {
                 break;
             }
         }
