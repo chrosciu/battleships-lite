@@ -41,7 +41,7 @@ public class ShooterTest {
     private static final List<Ship> SHIPS =
             Arrays.asList(VERTICAL_TWO_FIELDS_SHIP, ONE_FIELD_SHIP, ANOTHER_ONE_FIELD_SHIP, HORIZONTAL_TWO_FIELDS_SHIP);
     @Test
-    public void shouldProperlyCalculateShootResultForGivenSetofShipsOnBoard() {
+    public void shouldProperlyCalculateShootResultForGivenSetOfShipsOnBoard() {
         //given
         Shooter shooter = new Shooter(SHIPS);
 
