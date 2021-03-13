@@ -1,7 +1,6 @@
 package com.chrosciu;
 
 import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,29 +14,17 @@ public class Shooter {
 
     private List<List<MutablePair<Field, Boolean>>> data = new ArrayList<>();
 
-    /**
-     * Initialize shooter with given list of ships on board
-     *
-     * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
-     *              (true - vertical, false - horizontal)
-     */
-    public Shooter(List<Triple<Field, Integer, Orientation>> input) {
-        for (int i = 0; i < input.size(); ++i) {
+    public Shooter(List<Ship> ships) {
+        for (int i = 0; i < ships.size(); ++i) {
             List<MutablePair<Field, Boolean>> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getMiddle(); ++j) {
-                list.add(MutablePair.of(input.get(i).getLeft().shift(j, input.get(i).getRight()), false));
+            for (int j = 0; j < ships.get(i).getSize(); ++j) {
+                list.add(MutablePair.of(ships.get(i).getFirstField().shift(j, ships.get(i).getOrientation()), false));
             }
             data.add(list);
         }
     }
 
-    /**
-     * Take shot for given field and return shot result
-     *
-     * @param field - field coordinates
-     * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
-     */
-    public Result shoot(Field field) {
+    public Result takeShot(Field field) {
         Result result = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == result; ++i) {
