@@ -8,19 +8,7 @@ import java.util.List;
 
 public class Shooter {
 
-    public static class Point {
-        public int x;
-        public int y;
-    }
-
-    public static Point point(int x, int y) {
-        Point point = new Point();
-        point.x = x;
-        point.y = y;
-        return point;
-    }
-
-    private List<List<MutablePair<Point, Boolean>>> data = new ArrayList<>();
+    private List<List<MutablePair<Field, Boolean>>> data = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -28,14 +16,14 @@ public class Shooter {
      * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Triple<Point, Integer, Boolean>> input) {
+    public Shooter(List<Triple<Field, Integer, Boolean>> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<MutablePair<Point, Boolean>> list = new ArrayList<>();
+            List<MutablePair<Field, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getMiddle(); ++j) {
                 if (input.get(i).getRight()) {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
                 }
             }
             data.add(list);
@@ -45,17 +33,17 @@ public class Shooter {
     /**
      * Take shot for given field and return shot result
      *
-     * @param s - field coordinates
+     * @param field - field coordinates
      * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
-    public int shoot(Point s) {
+    public int shoot(Field field) {
         int rv = 0;
         //iterate through all ships
         for (int i = 0; i < data.size() && 0 == rv; ++i) {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && 0 == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getLeft().x == s.x && data.get(i).get(j).getLeft().y == s.y) {
+                if (data.get(i).get(j).getLeft().getX() == field.getX() && data.get(i).get(j).getLeft().getY() == field.getY()) {
                     data.get(i).get(j).setRight(true);
                     rv = 1;
                 }
