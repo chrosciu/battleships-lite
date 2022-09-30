@@ -1,7 +1,6 @@
 package com.chrosciu;
 
 import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +33,14 @@ public class Shooter {
      * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Triple<Point, Integer, Direction>> input) {
+    public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<MutablePair<Point, Boolean>> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getMiddle(); ++j) {
-                if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
+            for (int j = 0; j < input.get(i).getLength(); ++j) {
+                if (VERTICAL == input.get(i).getDirection()) {
+                    list.add(MutablePair.of(point(input.get(i).getFirstField().x, input.get(i).getFirstField().y + j), false));
                 } else {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
+                    list.add(MutablePair.of(point(input.get(i).getFirstField().x + j, input.get(i).getFirstField().y), false));
                 }
             }
             data.add(list);

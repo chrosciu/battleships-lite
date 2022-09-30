@@ -13,10 +13,10 @@ import static com.chrosciu.Shooter.point;
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
-        List<Triple<Shooter.Point, Integer, Direction>> rv = new ArrayList<>();
+        List<Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Triple.of(point(1, 1), 4, VERTICAL));
-        rv.add(Triple.of(point(6, 7), 2, HORIZONTAL));
+        rv.add(Ship.of(point(1, 1), 4, VERTICAL));
+        rv.add(Ship.of(point(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
