@@ -23,31 +23,31 @@ public class Shooter {
         }
     }
 
-    private List<List<FieldWithHitMark>> data = new ArrayList<>();
+    private List<List<FieldWithHitMark>> shipsWithHitMarks = new ArrayList<>();
 
     public Shooter(List<Ship> ships) {
-        for (int i = 0; i < ships.size(); ++i) {
-            List<FieldWithHitMark> list = new ArrayList<>();
-            for (int j = 0; j < ships.get(i).getLength(); ++j) {
-                if (VERTICAL == ships.get(i).getDirection()) {
-                    list.add(new FieldWithHitMark(Field.of(ships.get(i).getFirstField().getX(), ships.get(i).getFirstField().getY() + j)));
+        for (Ship ship : ships) {
+            List<FieldWithHitMark> shipWithHitMarks = new ArrayList<>();
+            for (int j = 0; j < ship.getLength(); ++j) {
+                if (VERTICAL == ship.getDirection()) {
+                    shipWithHitMarks.add(new FieldWithHitMark(Field.of(ship.getFirstField().getX(), ship.getFirstField().getY() + j)));
                 } else {
-                    list.add(new FieldWithHitMark(Field.of(ships.get(i).getFirstField().getX() + j, ships.get(i).getFirstField().getY())));
+                    shipWithHitMarks.add(new FieldWithHitMark(Field.of(ship.getFirstField().getX() + j, ship.getFirstField().getY())));
                 }
             }
-            data.add(list);
+            shipsWithHitMarks.add(shipWithHitMarks);
         }
     }
 
     public Result shoot(Field s) {
         Result result = MISSED;
         //iterate through all ships
-        for (int i = 0; i < data.size() && MISSED == result; ++i) {
+        for (int i = 0; i < shipsWithHitMarks.size() && MISSED == result; ++i) {
             //iterate through all ship fields
-            for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
+            for (int j = 0; j < shipsWithHitMarks.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getField().getX() == s.getX() && data.get(i).get(j).getField().getY() == s.getY()) {
-                    data.get(i).get(j).markAsHit();
+                if (shipsWithHitMarks.get(i).get(j).getField().getX() == s.getX() && shipsWithHitMarks.get(i).get(j).getField().getY() == s.getY()) {
+                    shipsWithHitMarks.get(i).get(j).markAsHit();
                     result = HIT;
                 }
             }
@@ -55,8 +55,8 @@ public class Shooter {
             if (HIT == result) {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
-                for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).isHit();
+                for (int j = 0; j < shipsWithHitMarks.get(i).size() && a; ++j) {
+                    a &= shipsWithHitMarks.get(i).get(j).isHit();
                 }
                 if (a) {
                     result = Result.SUNK;
@@ -65,9 +65,9 @@ public class Shooter {
         }
         //check if all ships are sunk
         boolean a = true;
-        for (int i = 0; i < data.size() && a; ++i) {
-            for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).isHit();
+        for (int i = 0; i < shipsWithHitMarks.size() && a; ++i) {
+            for (int j = 0; j < shipsWithHitMarks.get(i).size() && a; ++j) {
+                a &= shipsWithHitMarks.get(i).get(j).isHit();
             }
         }
         if (a) {
