@@ -29,9 +29,11 @@ public class Shooter {
         for (Ship ship : ships) {
             List<FieldWithHitMark> shipWithHitMarks = new ArrayList<>();
             for (int shift = 0; shift < ship.getLength(); ++shift) {
+
                 Field shiftedField = (VERTICAL == ship.getDirection()) ?
                         Field.of(ship.getFirstField().getX(), ship.getFirstField().getY() + shift) :
                         Field.of(ship.getFirstField().getX() + shift, ship.getFirstField().getY());
+
                 shipWithHitMarks.add(new FieldWithHitMark(shiftedField));
             }
             shipsWithHitMarks.add(shipWithHitMarks);

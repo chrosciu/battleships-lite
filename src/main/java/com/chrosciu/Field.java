@@ -13,4 +13,9 @@ public class Field {
     public static Field of(int x, int y) {
         return new Field(x, y);
     }
+
+    public Field shift(int shift, Direction direction) {
+        //TODO: Implement
+        return null;
+    }
 }
