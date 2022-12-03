@@ -1,16 +1,16 @@
 package com.chrosciu;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Field {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public static Field of(int x, int y) {
-        Field field = new Field();
-        field.x = x;
-        field.y = y;
-        return field;
+        return new Field(x, y);
     }
 }
