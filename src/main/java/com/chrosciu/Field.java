@@ -1,8 +1,11 @@
 package com.chrosciu;
 
+import lombok.Getter;
+
+@Getter
 public class Field {
-    public int x;
-    public int y;
+    private int x;
+    private int y;
 
     public static Field of(int x, int y) {
         Field field = new Field();

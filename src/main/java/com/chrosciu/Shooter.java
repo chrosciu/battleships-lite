@@ -26,9 +26,9 @@ public class Shooter {
             List<MutablePair<Field, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getMiddle(); ++j) {
                 if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
                 }
             }
             data.add(list);
@@ -48,7 +48,7 @@ public class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getLeft().x == s.x && data.get(i).get(j).getLeft().y == s.y) {
+                if (data.get(i).get(j).getLeft().getX() == s.getX() && data.get(i).get(j).getLeft().getY() == s.getY()) {
                     data.get(i).get(j).setRight(true);
                     result = HIT;
                 }
