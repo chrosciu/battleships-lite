@@ -1,5 +1,8 @@
 package com.chrosciu;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +12,16 @@ import static com.chrosciu.Result.HIT;
 import static com.chrosciu.Result.MISSED;
 
 public class Shooter {
+    @RequiredArgsConstructor
+    @Getter
+    private static class FieldWithHitMark {
+        private final Field field;
+        private boolean hit = false;
+
+        public void markAsHit() {
+            hit = true;
+        }
+    }
 
     private List<List<FieldWithHitMark>> data = new ArrayList<>();
 
