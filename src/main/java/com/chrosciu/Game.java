@@ -9,15 +9,15 @@ import java.util.Scanner;
 import static com.chrosciu.Result.FINISHED;
 import static com.chrosciu.Direction.HORIZONTAL;
 import static com.chrosciu.Direction.VERTICAL;
-import static com.chrosciu.Shooter.point;
+import static com.chrosciu.Field.of;
 
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
-        List<Triple<Shooter.Point, Integer, Direction>> rv = new ArrayList<>();
+        List<Triple<Field, Integer, Direction>> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Triple.of(point(1, 1), 4, VERTICAL));
-        rv.add(Triple.of(point(6, 7), 2, HORIZONTAL));
+        rv.add(Triple.of(of(1, 1), 4, VERTICAL));
+        rv.add(Triple.of(of(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
@@ -29,7 +29,7 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            Result result = shooter.shoot(point(a, b));
+            Result result = shooter.shoot(of(a, b));
             System.out.println(result);
             //if all ships sunk finish the game
             if (FINISHED == result) {
