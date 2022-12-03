@@ -1,7 +1,6 @@
 package com.chrosciu;
 
 import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,32 +14,20 @@ public class Shooter {
 
     private List<List<MutablePair<Field, Boolean>>> data = new ArrayList<>();
 
-    /**
-     * Initialize shooter with given list of ships on board
-     *
-     * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
-     *              (true - vertical, false - horizontal)
-     */
-    public Shooter(List<Triple<Field, Integer, Direction>> input) {
-        for (int i = 0; i < input.size(); ++i) {
+    public Shooter(List<Ship> ships) {
+        for (int i = 0; i < ships.size(); ++i) {
             List<MutablePair<Field, Boolean>> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getMiddle(); ++j) {
-                if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
+            for (int j = 0; j < ships.get(i).getLength(); ++j) {
+                if (VERTICAL == ships.get(i).getDirection()) {
+                    list.add(MutablePair.of(Field.of(ships.get(i).getFirstField().getX(), ships.get(i).getFirstField().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
+                    list.add(MutablePair.of(Field.of(ships.get(i).getFirstField().getX() + j, ships.get(i).getFirstField().getY()), false));
                 }
             }
             data.add(list);
         }
     }
 
-    /**
-     * Take shot for given field and return shot result
-     *
-     * @param s - field coordinates
-     * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
-     */
     public Result shoot(Field s) {
         Result result = MISSED;
         //iterate through all ships
