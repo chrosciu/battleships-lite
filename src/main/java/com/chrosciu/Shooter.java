@@ -34,7 +34,7 @@ public class Shooter {
         }
     }
 
-    public Result shoot(Field s) {
+    public Result shoot(Field field) {
         Result result = MISSED;
         //iterate through all ships
         for (int i = 0; i < shipsWithHitMarks.size() && MISSED == result; ++i) {
@@ -42,7 +42,7 @@ public class Shooter {
             List<FieldWithHitMark> shipWithHitMarks = shipsWithHitMarks.get(i);
             for (int j = 0; j < shipWithHitMarks.size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (shipWithHitMarks.get(j).getField().getX() == s.getX() && shipWithHitMarks.get(j).getField().getY() == s.getY()) {
+                if (shipWithHitMarks.get(j).getField().equals(field)) {
                     shipWithHitMarks.get(j).markAsHit();
                     result = HIT;
                 }
