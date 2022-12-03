@@ -1,21 +1,22 @@
 package com.chrosciu;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Value;
+import lombok.With;
 
-@Getter
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@Value(staticConstructor = "of")
+@With
 public class Field {
-    private final int x;
-    private final int y;
+    int x;
+    int y;
 
-    public static Field of(int x, int y) {
-        return new Field(x, y);
-    }
-
-    public Field shift(int shift, Direction direction) {
-        //TODO: Implement
-        return null;
+    public Field shiftInDirection(int shift, Direction direction) {
+        switch (direction) {
+            case HORIZONTAL:
+                return this.withX(x + shift);
+            case VERTICAL:
+                return this.withY(y + shift);
+            default:
+                throw new IllegalArgumentException(String.format("Unexpected direction: %s", direction));
+        }
     }
 }
