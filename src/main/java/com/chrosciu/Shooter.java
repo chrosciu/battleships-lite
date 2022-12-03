@@ -28,12 +28,11 @@ public class Shooter {
     public Shooter(List<Ship> ships) {
         for (Ship ship : ships) {
             List<FieldWithHitMark> shipWithHitMarks = new ArrayList<>();
-            for (int j = 0; j < ship.getLength(); ++j) {
-                if (VERTICAL == ship.getDirection()) {
-                    shipWithHitMarks.add(new FieldWithHitMark(Field.of(ship.getFirstField().getX(), ship.getFirstField().getY() + j)));
-                } else {
-                    shipWithHitMarks.add(new FieldWithHitMark(Field.of(ship.getFirstField().getX() + j, ship.getFirstField().getY())));
-                }
+            for (int shift = 0; shift < ship.getLength(); ++shift) {
+                Field shiftedField = (VERTICAL == ship.getDirection()) ?
+                        Field.of(ship.getFirstField().getX(), ship.getFirstField().getY() + shift) :
+                        Field.of(ship.getFirstField().getX() + shift, ship.getFirstField().getY());
+                shipWithHitMarks.add(new FieldWithHitMark(shiftedField));
             }
             shipsWithHitMarks.add(shipWithHitMarks);
         }
