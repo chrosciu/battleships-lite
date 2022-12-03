@@ -59,7 +59,13 @@ public class Shooter {
                 }
             }
         }
-        //check if all ships are sunk
+        if (areAllShipsSunk()) {
+            result = FINISHED;
+        }
+        return result;
+    }
+
+    private boolean areAllShipsSunk() {
         boolean allShipsSunk = true;
         for (int i = 0; i < shipsWithHitMarks.size() && allShipsSunk; ++i) {
             List<FieldWithHitMark> shipWithHitMarks = shipsWithHitMarks.get(i);
@@ -67,9 +73,6 @@ public class Shooter {
                 allShipsSunk &= shipWithHitMarks.get(j).isHit();
             }
         }
-        if (allShipsSunk) {
-            result = FINISHED;
-        }
-        return result;
+        return allShipsSunk;
     }
 }
