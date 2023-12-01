@@ -11,19 +11,7 @@ import static com.chrosciu.Result.*;
 
 public class Shooter {
 
-    public static class Point {
-        public int x;
-        public int y;
-    }
-
-    public static Point point(int x, int y) {
-        Point point = new Point();
-        point.x = x;
-        point.y = y;
-        return point;
-    }
-
-    private List<List<MutablePair<Point, Boolean>>> data = new ArrayList<>();
+    private List<List<MutablePair<Field, Boolean>>> data = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -31,14 +19,14 @@ public class Shooter {
      * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Triple<Point, Integer, Direction>> input) {
+    public Shooter(List<Triple<Field, Integer, Direction>> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<MutablePair<Point, Boolean>> list = new ArrayList<>();
+            List<MutablePair<Field, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getMiddle(); ++j) {
                 if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
                 }
             }
             data.add(list);
@@ -51,14 +39,14 @@ public class Shooter {
      * @param s - field coordinates
      * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
-    public Result shoot(Point s) {
+    public Result shoot(Field s) {
         Result result = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == result; ++i) {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getLeft().x == s.x && data.get(i).get(j).getLeft().y == s.y) {
+                if (data.get(i).get(j).getLeft().getX() == s.getX() && data.get(i).get(j).getLeft().getY() == s.getY()) {
                     data.get(i).get(j).setRight(true);
                     result = HIT;
                 }
