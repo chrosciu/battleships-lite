@@ -1,6 +1,5 @@
 package com.chrosciu;
 
-import org.apache.commons.lang3.tuple.Triple;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -30,20 +29,20 @@ public class ShooterTest {
     private static final int ONE_FIELD_SHIP_SIZE = 1;
     private static final int TWO_FIELDS_SHIP_SIZE = 2;
 
-    private static final Triple<Field, Integer, Direction> VERTICAL_TWO_FIELDS_SHIP =
-            Triple.of(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, VERTICAL);
-    private static final Triple<Field, Integer, Direction> ONE_FIELD_SHIP =
-            Triple.of(ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, HORIZONTAL);
-    private static final Triple<Field, Integer, Direction> ANOTHER_ONE_FIELD_SHIP =
-            Triple.of(ANOTHER_ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, VERTICAL);
-    private static final Triple<Field, Integer, Direction> HORIZONTAL_TWO_FIELDS_SHIP =
-            Triple.of(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, HORIZONTAL);
+    private static final Ship VERTICAL_TWO_FIELDS_SHIP =
+            Ship.of(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, VERTICAL);
+    private static final Ship ONE_FIELD_SHIP =
+            Ship.of(ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, HORIZONTAL);
+    private static final Ship ANOTHER_ONE_FIELD_SHIP =
+            Ship.of(ANOTHER_ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, VERTICAL);
+    private static final Ship HORIZONTAL_TWO_FIELDS_SHIP =
+            Ship.of(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, HORIZONTAL);
 
-    private static final List<Triple<Field, Integer, Direction>> BOARD_WITH_NO_SHIPS =
+    private static final List<Ship> BOARD_WITH_NO_SHIPS =
             Arrays.asList();
-    private static final List<Triple<Field, Integer, Direction>> BOARD_WITH_ONE_SHIP =
+    private static final List<Ship> BOARD_WITH_ONE_SHIP =
             Arrays.asList(VERTICAL_TWO_FIELDS_SHIP);
-    private static final List<Triple<Field, Integer, Direction>> BOARD_WITH_FOUR_SHIPS =
+    private static final List<Ship> BOARD_WITH_FOUR_SHIPS =
             Arrays.asList(VERTICAL_TWO_FIELDS_SHIP, ONE_FIELD_SHIP, ANOTHER_ONE_FIELD_SHIP, HORIZONTAL_TWO_FIELDS_SHIP);
 
 
