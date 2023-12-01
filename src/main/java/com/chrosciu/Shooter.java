@@ -12,20 +12,14 @@ public class Shooter {
 
     private List<List<MutablePair<Field, Boolean>>> data = new ArrayList<>();
 
-    /**
-     * Initialize shooter with given list of ships on board
-     *
-     * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
-     *              (true - vertical, false - horizontal)
-     */
-    public Shooter(List<Ship> input) {
-        for (int i = 0; i < input.size(); ++i) {
+    public Shooter(List<Ship> ships) {
+        for (int i = 0; i < ships.size(); ++i) {
             List<MutablePair<Field, Boolean>> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getLength(); ++j) {
-                if (VERTICAL == input.get(i).getDirection()) {
-                    list.add(MutablePair.of(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j), false));
+            for (int j = 0; j < ships.get(i).getLength(); ++j) {
+                if (VERTICAL == ships.get(i).getDirection()) {
+                    list.add(MutablePair.of(Field.of(ships.get(i).getFirstField().getX(), ships.get(i).getFirstField().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY()), false));
+                    list.add(MutablePair.of(Field.of(ships.get(i).getFirstField().getX() + j, ships.get(i).getFirstField().getY()), false));
                 }
             }
             data.add(list);
