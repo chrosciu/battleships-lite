@@ -1,4 +1,4 @@
-package com.chrosciu;
+package eu.chrost;
 
 import org.apache.commons.lang3.tuple.Triple;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.chrosciu.Shooter.point;
+import static eu.chrost.Shooter.point;
 
 public class Game {
     public static void main(String[] args) {
