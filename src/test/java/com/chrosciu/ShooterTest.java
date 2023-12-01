@@ -1,4 +1,5 @@
-import com.chrosciu.Shooter;
+package com.chrosciu;
+
 import com.chrosciu.Shooter.Point;
 import org.apache.commons.lang3.tuple.Triple;
 import org.junit.Test;
