@@ -7,6 +7,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.chrosciu.Direction.HORIZONTAL;
+import static com.chrosciu.Direction.VERTICAL;
 import static com.chrosciu.Result.*;
 import static com.chrosciu.Shooter.point;
 import static org.junit.Assert.assertEquals;
@@ -26,26 +28,24 @@ public class ShooterTest {
     private static final Point FIELD_WITHOUT_SHIP = point(1, 2);
     private static final Point ANOTHER_FIELD_WITHOUT_SHIP = point(4, 4);
 
-    private static final boolean VERTICAL = true;
-    private static final boolean HORIZONTAL = false;
-
+    
     private static final int ONE_FIELD_SHIP_SIZE = 1;
     private static final int TWO_FIELDS_SHIP_SIZE = 2;
 
-    private static final Triple<Point, Integer, Boolean> VERTICAL_TWO_FIELDS_SHIP =
+    private static final Triple<Point, Integer, Direction> VERTICAL_TWO_FIELDS_SHIP =
             Triple.of(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, VERTICAL);
-    private static final Triple<Point, Integer, Boolean> ONE_FIELD_SHIP =
+    private static final Triple<Point, Integer, Direction> ONE_FIELD_SHIP =
             Triple.of(ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, HORIZONTAL);
-    private static final Triple<Point, Integer, Boolean> ANOTHER_ONE_FIELD_SHIP =
+    private static final Triple<Point, Integer, Direction> ANOTHER_ONE_FIELD_SHIP =
             Triple.of(ANOTHER_ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, VERTICAL);
-    private static final Triple<Point, Integer, Boolean> HORIZONTAL_TWO_FIELDS_SHIP =
+    private static final Triple<Point, Integer, Direction> HORIZONTAL_TWO_FIELDS_SHIP =
             Triple.of(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, HORIZONTAL);
 
-    private static final List<Triple<Point, Integer, Boolean>> BOARD_WITH_NO_SHIPS =
+    private static final List<Triple<Point, Integer, Direction>> BOARD_WITH_NO_SHIPS =
             Arrays.asList();
-    private static final List<Triple<Point, Integer, Boolean>> BOARD_WITH_ONE_SHIP =
+    private static final List<Triple<Point, Integer, Direction>> BOARD_WITH_ONE_SHIP =
             Arrays.asList(VERTICAL_TWO_FIELDS_SHIP);
-    private static final List<Triple<Point, Integer, Boolean>> BOARD_WITH_FOUR_SHIPS =
+    private static final List<Triple<Point, Integer, Direction>> BOARD_WITH_FOUR_SHIPS =
             Arrays.asList(VERTICAL_TWO_FIELDS_SHIP, ONE_FIELD_SHIP, ANOTHER_ONE_FIELD_SHIP, HORIZONTAL_TWO_FIELDS_SHIP);
 
 
