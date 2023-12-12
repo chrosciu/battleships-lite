@@ -10,5 +10,7 @@ class Ship {
     private final int length;
     private final Orientation orientation;
 
-    // static constructor
+    public static Ship of(Field firstField, int length, Orientation orientation) {
+        return new Ship(firstField, length, orientation);
+    }
 }

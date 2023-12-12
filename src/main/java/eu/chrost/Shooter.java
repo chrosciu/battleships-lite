@@ -1,7 +1,6 @@
 package eu.chrost;
 
 import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +18,17 @@ public class Shooter {
     /**
      * Initialize shooter with given list of ships on board
      *
-     * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
+     * @param ships - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Triple<Field, Integer, Orientation>> input) {
-        for (int i = 0; i < input.size(); ++i) {
+    public Shooter(List<Ship> ships) {
+        for (int i = 0; i < ships.size(); ++i) {
             List<MutablePair<Field, Boolean>> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getMiddle(); ++j) {
-                if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
+            for (int j = 0; j < ships.get(i).getLength(); ++j) {
+                if (VERTICAL == ships.get(i).getOrientation()) {
+                    list.add(MutablePair.of(Field.of(ships.get(i).getFirstField().getX(), ships.get(i).getFirstField().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
+                    list.add(MutablePair.of(Field.of(ships.get(i).getFirstField().getX() + j, ships.get(i).getFirstField().getY()), false));
                 }
             }
             data.add(list);
@@ -39,16 +38,16 @@ public class Shooter {
     /**
      * Take shot for given field and return shot result
      *
-     * @param s - field coordinates
+     * @param field - field coordinates
      */
-    public Result shoot(Field s) {
+    public Result shoot(Field field) {
         Result rv = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == rv; ++i) {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getLeft().getX() == s.getX() && data.get(i).get(j).getLeft().getY() == s.getY()) {
+                if (data.get(i).get(j).getLeft().getX() == field.getX() && data.get(i).get(j).getLeft().getY() == field.getY()) {
                     data.get(i).get(j).setRight(true);
                     rv = HIT;
                 }
