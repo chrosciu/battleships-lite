@@ -27,9 +27,9 @@ public class Shooter {
             List<MutablePair<Point, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getMiddle(); ++j) {
                 if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(Point.point(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
+                    list.add(MutablePair.of(Point.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(Point.point(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
+                    list.add(MutablePair.of(Point.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
                 }
             }
             data.add(list);
