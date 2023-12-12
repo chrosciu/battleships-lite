@@ -1,12 +1,10 @@
 package eu.chrost;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 
 @RequiredArgsConstructor
-@Getter
 enum Result {
     MISSED(0),
     HIT(1),
