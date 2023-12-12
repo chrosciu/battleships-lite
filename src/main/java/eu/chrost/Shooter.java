@@ -49,26 +49,26 @@ public class Shooter {
      * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
     public Result shoot(Point s) {
-        int rv = 0;
+        Result rv = Result.fromRank(0);
         //iterate through all ships
-        for (int i = 0; i < data.size() && 0 == rv; ++i) {
+        for (int i = 0; i < data.size() && Result.fromRank(0) == rv; ++i) {
             //iterate through all ship fields
-            for (int j = 0; j < data.get(i).size() && 0 == rv; ++j) {
+            for (int j = 0; j < data.get(i).size() && Result.fromRank(0) == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
                 if (data.get(i).get(j).getLeft().x == s.x && data.get(i).get(j).getLeft().y == s.y) {
                     data.get(i).get(j).setRight(true);
-                    rv = 1;
+                    rv = Result.fromRank(1);
                 }
             }
             //if ship is hit - check if it is sunk
-            if (1 == rv) {
+            if (Result.fromRank(1) == rv) {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
                     a &= data.get(i).get(j).getRight();
                 }
                 if (a) {
-                    rv = 2;
+                    rv = Result.fromRank(2);
                 }
             }
         }
@@ -80,8 +80,8 @@ public class Shooter {
             }
         }
         if (a) {
-            rv = 3;
+            rv = Result.fromRank(3);
         }
-        return Result.fromRank(rv);
+        return rv;
     }
 }
