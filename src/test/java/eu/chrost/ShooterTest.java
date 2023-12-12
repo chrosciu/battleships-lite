@@ -2,6 +2,9 @@ package eu.chrost;
 
 import eu.chrost.Shooter.Point;
 import eu.chrost.Shooter.Ship;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,6 +13,7 @@ import static eu.chrost.Shooter.point;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class ShooterTest {
     private static final Point VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD = point(3, 4);
     private static final Point VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD = point(3, 5);
@@ -41,9 +45,9 @@ class ShooterTest {
 
     private static final List<Ship> NO_SHIPS =
             List.of();
-    private static final List<Ship> SINGLE_SHIP =
+    private static final List<Ship> SINGLE_TWO_FIELDS_SHIP =
             List.of(VERTICAL_TWO_FIELDS_SHIP);
-    private static final List<Ship> FOUR_SHIPS =
+    private static final List<Ship> MULTIPLE_SHIPS =
             List.of(VERTICAL_TWO_FIELDS_SHIP, ONE_FIELD_SHIP, ANOTHER_ONE_FIELD_SHIP, HORIZONTAL_TWO_FIELDS_SHIP);
 
     private static final int MISSED = 0;
@@ -52,7 +56,7 @@ class ShooterTest {
     private static final int FINISHED = 3;
 
     @Test
-    public void shouldReportFinishedWhenShootingOnBoardWithoutShips() {
+    void A_board_without_ships_returns_finished_state_on_first_shot() {
         //given
         Shooter shooter = new Shooter(NO_SHIPS);
 
@@ -63,34 +67,40 @@ class ShooterTest {
         assertThat(result).isEqualTo(FINISHED);
     }
 
-    @Test
-    public void shouldReportProperStatesWhenShootingOnSingleShip() {
+    @Nested
+    class A_board_with_single_two_fields_ship {
         //given
-        Shooter shooter = new Shooter(SINGLE_SHIP);
+        Shooter shooter = new Shooter(SINGLE_TWO_FIELDS_SHIP);
 
-        //when
-        int result = shooter.shoot(FIELD_WITHOUT_SHIP);
+        @Test
+        void returns_missed_status_on_first_shot_on_field_without_ship() {
+            //when
+            int result = shooter.shoot(FIELD_WITHOUT_SHIP);
 
-        //then
-        assertEquals(MISSED, result);
+            //then
+            assertEquals(MISSED, result);
+        }
 
-        //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        @Test
+        void returns_hit_and_then_sunk_results_on_shot_on_all_ship_fields() {
+            //when
+            int result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
-        //then
-        assertEquals(HIT, result);
+            //then
+            assertEquals(HIT, result);
 
-        //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+            //when
+            result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
-        //then
-        assertEquals(FINISHED, result);
+            //then
+            assertEquals(FINISHED, result);
+        }
     }
 
     @Test
-    public void shouldProperlyCalculateShootResultForGivenSetOfShipsOnBoard() {
+    void A_board_with_multiple_ships_returns_proper_statuses_on_all_shots() {
         //given
-        Shooter shooter = new Shooter(FOUR_SHIPS);
+        Shooter shooter = new Shooter(MULTIPLE_SHIPS);
 
         //when
         int result = shooter.shoot(FIELD_WITHOUT_SHIP);
