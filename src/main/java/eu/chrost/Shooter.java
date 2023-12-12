@@ -14,7 +14,7 @@ import static eu.chrost.Result.SUNK;
 
 public class Shooter {
 
-    private List<List<MutablePair<Point, Boolean>>> data = new ArrayList<>();
+    private List<List<MutablePair<Field, Boolean>>> data = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -22,14 +22,14 @@ public class Shooter {
      * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Triple<Point, Integer, Orientation>> input) {
+    public Shooter(List<Triple<Field, Integer, Orientation>> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<MutablePair<Point, Boolean>> list = new ArrayList<>();
+            List<MutablePair<Field, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getMiddle(); ++j) {
                 if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(Point.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(Point.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
+                    list.add(MutablePair.of(Field.of(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
                 }
             }
             data.add(list);
@@ -41,7 +41,7 @@ public class Shooter {
      *
      * @param s - field coordinates
      */
-    public Result shoot(Point s) {
+    public Result shoot(Field s) {
         Result rv = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == rv; ++i) {

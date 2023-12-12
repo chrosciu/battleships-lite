@@ -9,12 +9,12 @@ import java.util.Scanner;
 import static eu.chrost.Orientation.HORIZONTAL;
 import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
-import static eu.chrost.Point.of;
+import static eu.chrost.Field.of;
 
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
-        List<Triple<Point, Integer, Orientation>> rv = new ArrayList<>();
+        List<Triple<Field, Integer, Orientation>> rv = new ArrayList<>();
         //... and fill it with ships placed on board
         rv.add(Triple.of(of(1, 1), 4, VERTICAL));
         rv.add(Triple.of(of(6, 7), 2, HORIZONTAL));
