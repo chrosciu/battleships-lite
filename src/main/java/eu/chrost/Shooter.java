@@ -14,18 +14,6 @@ import static eu.chrost.Result.SUNK;
 
 public class Shooter {
 
-    public static class Point {
-        private int x;
-        private int y;
-
-        public static Point point(int x, int y) {
-            Point point = new Point();
-            point.x = x;
-            point.y = y;
-            return point;
-        }
-    }
-
     private List<List<MutablePair<Point, Boolean>>> data = new ArrayList<>();
 
     /**
@@ -39,9 +27,9 @@ public class Shooter {
             List<MutablePair<Point, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getMiddle(); ++j) {
                 if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(Point.point(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
+                    list.add(MutablePair.of(Point.point(input.get(i).getLeft().getX(), input.get(i).getLeft().getY() + j), false));
                 } else {
-                    list.add(MutablePair.of(Point.point(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
+                    list.add(MutablePair.of(Point.point(input.get(i).getLeft().getX() + j, input.get(i).getLeft().getY()), false));
                 }
             }
             data.add(list);
@@ -60,7 +48,7 @@ public class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getLeft().x == s.x && data.get(i).get(j).getLeft().y == s.y) {
+                if (data.get(i).get(j).getLeft().getX() == s.getX() && data.get(i).get(j).getLeft().getY() == s.getY()) {
                     data.get(i).get(j).setRight(true);
                     rv = HIT;
                 }
