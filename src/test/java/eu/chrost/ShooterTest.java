@@ -12,7 +12,6 @@ import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
 import static eu.chrost.Result.SUNK;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ShooterTest {
     private static final Field VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD = of(3, 4);
@@ -67,20 +66,20 @@ class ShooterTest {
         //when
         Result result = shooter.shoot(FIELD_WITHOUT_SHIP);
 
-        //then
-        assertEquals(MISSED, result);
+        //then        
+        assertThat(result).isEqualTo(MISSED);
 
         //when
         result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
-        assertEquals(HIT, result);
+        assertThat(result).isEqualTo(HIT);
 
         //when
         result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
-        assertEquals(FINISHED, result);
+        assertThat(result).isEqualTo(FINISHED);
     }
 
     @Test
@@ -92,67 +91,67 @@ class ShooterTest {
         Result result = shooter.shoot(FIELD_WITHOUT_SHIP);
 
         //then
-        assertEquals(MISSED, result);
+        assertThat(result).isEqualTo(MISSED);
 
         //when
         result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
-        assertEquals(HIT, result);
+        assertThat(result).isEqualTo(HIT);
 
         //when
         result = shooter.shoot(ONE_FIELD_SHIP_FIELD);
 
         //then
-        assertEquals(SUNK, result);
+        assertThat(result).isEqualTo(SUNK);
 
         //when
         result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
-        assertEquals(HIT, result);
+        assertThat(result).isEqualTo(HIT);
 
         //when
         result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
-        assertEquals(SUNK, result);
+        assertThat(result).isEqualTo(SUNK);
 
         //when
         result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
-        assertEquals(SUNK, result);
+        assertThat(result).isEqualTo(SUNK);
 
         //when
         result = shooter.shoot(ANOTHER_ONE_FIELD_SHIP_FIELD);
 
         //then
-        assertEquals(SUNK, result);
+        assertThat(result).isEqualTo(SUNK);
 
         //when
         result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
-        assertEquals(HIT, result);
+        assertThat(result).isEqualTo(HIT);
 
         //when
         result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
-        assertEquals(FINISHED, result);
+        assertThat(result).isEqualTo(FINISHED);
 
         //when
         result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
-        assertEquals(FINISHED, result);
+        assertThat(result).isEqualTo(FINISHED);
 
         //when
         result = shooter.shoot(ANOTHER_FIELD_WITHOUT_SHIP);
 
         //then
-        assertEquals(FINISHED, result);
+        assertThat(result).isEqualTo(FINISHED);
     }
 
 }
