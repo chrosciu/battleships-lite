@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Shooter.point;
 
 public class Game {
@@ -26,10 +27,10 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            int r = shooter.shoot(point(a, b));
+            Result r = shooter.shoot(point(a, b));
             System.out.println(r);
             //if all ships sunk finish the game
-            if (3 == r) {
+            if (FINISHED == r) {
                 break;
             }
         }

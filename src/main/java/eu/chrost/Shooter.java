@@ -48,7 +48,7 @@ public class Shooter {
      * @param s - field coordinates
      * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
-    public int shoot(Point s) {
+    public Result shoot(Point s) {
         int rv = 0;
         //iterate through all ships
         for (int i = 0; i < data.size() && 0 == rv; ++i) {
@@ -82,6 +82,6 @@ public class Shooter {
         if (a) {
             rv = 3;
         }
-        return rv;
+        return Result.fromRank(rv);
     }
 }
