@@ -6,6 +6,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.util.ArrayList;
 import java.util.List;
 
+import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
@@ -33,11 +34,11 @@ public class Shooter {
      * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Triple<Point, Integer, Boolean>> input) {
+    public Shooter(List<Triple<Point, Integer, Orientation>> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<MutablePair<Point, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getMiddle(); ++j) {
-                if (input.get(i).getRight()) {
+                if (VERTICAL == input.get(i).getRight()) {
                     list.add(MutablePair.of(point(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
                 } else {
                     list.add(MutablePair.of(point(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
