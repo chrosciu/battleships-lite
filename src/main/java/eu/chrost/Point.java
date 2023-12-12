@@ -1,16 +1,15 @@
 package eu.chrost;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public class Point {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public static Point of(int x, int y) {
-        Point point = new Point();
-        point.x = x;
-        point.y = y;
-        return point;
+        return new Point(x, y);
     }
 }
