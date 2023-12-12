@@ -52,7 +52,6 @@ public class Shooter {
      * Take shot for given field and return shot result
      *
      * @param s - field coordinates
-     * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
     public Result shoot(Point s) {
         Result rv = MISSED;
