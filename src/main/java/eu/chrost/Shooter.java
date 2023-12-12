@@ -17,13 +17,13 @@ public class Shooter {
     public static class Point {
         private int x;
         private int y;
-    }
 
-    public static Point point(int x, int y) {
-        Point point = new Point();
-        point.x = x;
-        point.y = y;
-        return point;
+        public static Point point(int x, int y) {
+            Point point = new Point();
+            point.x = x;
+            point.y = y;
+            return point;
+        }
     }
 
     private List<List<MutablePair<Point, Boolean>>> data = new ArrayList<>();
@@ -39,9 +39,9 @@ public class Shooter {
             List<MutablePair<Point, Boolean>> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getMiddle(); ++j) {
                 if (VERTICAL == input.get(i).getRight()) {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
+                    list.add(MutablePair.of(Point.point(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
                 } else {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
+                    list.add(MutablePair.of(Point.point(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
                 }
             }
             data.add(list);
