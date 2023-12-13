@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(staticName = "of")
 @Getter
-class Ship {
+class ShipDefinition {
     private final Field firstField;
     private final int length;
     private final Orientation orientation;

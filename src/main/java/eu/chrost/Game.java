@@ -11,12 +11,12 @@ import static eu.chrost.Result.FINISHED;
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
-        List<Ship> ships = new ArrayList<>();
+        List<ShipDefinition> shipDefinitions = new ArrayList<>();
         //... and fill it with ships placed on board
-        ships.add(Ship.of(Field.of(1, 1), 4, VERTICAL));
-        ships.add(Ship.of(Field.of(6, 7), 2, HORIZONTAL));
+        shipDefinitions.add(ShipDefinition.of(Field.of(1, 1), 4, VERTICAL));
+        shipDefinitions.add(ShipDefinition.of(Field.of(6, 7), 2, HORIZONTAL));
         //let's start the game
-        Shooter shooter = new Shooter(ships);
+        Shooter shooter = new Shooter(shipDefinitions);
         Scanner keyboard = new Scanner(System.in);
         //read user shots
         for (;;) {

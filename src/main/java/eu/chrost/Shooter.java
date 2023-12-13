@@ -16,17 +16,17 @@ public class Shooter {
     /**
      * Initialize shooter with given list of ships on board
      *
-     * @param ships - list of ships. Each ship is described by first field coordinate, length and orientation
+     * @param shipDefinitions - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Ship> ships) {
-        for (int i = 0; i < ships.size(); ++i) {
+    public Shooter(List<ShipDefinition> shipDefinitions) {
+        for (int i = 0; i < shipDefinitions.size(); ++i) {
             List<ShipField> list = new ArrayList<>();
-            for (int j = 0; j < ships.get(i).getLength(); ++j) {
-                if (VERTICAL == ships.get(i).getOrientation()) {
-                    list.add(ShipField.of(Field.of(ships.get(i).getFirstField().getX(), ships.get(i).getFirstField().getY() + j)));
+            for (int j = 0; j < shipDefinitions.get(i).getLength(); ++j) {
+                if (VERTICAL == shipDefinitions.get(i).getOrientation()) {
+                    list.add(ShipField.of(Field.of(shipDefinitions.get(i).getFirstField().getX(), shipDefinitions.get(i).getFirstField().getY() + j)));
                 } else {
-                    list.add(ShipField.of(Field.of(ships.get(i).getFirstField().getX() + j, ships.get(i).getFirstField().getY())));
+                    list.add(ShipField.of(Field.of(shipDefinitions.get(i).getFirstField().getX() + j, shipDefinitions.get(i).getFirstField().getY())));
                 }
             }
             data.add(list);
