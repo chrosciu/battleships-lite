@@ -30,36 +30,36 @@ public class Shooter {
     }
 
     public static class Ship {
-        private Point p;
-        private int l;
+        private Point firstField;
+        private int length;
         private boolean vertical;
 
-        public static Ship of(Point p, int l, boolean vertical) {
+        public static Ship of(Point firstField, int length, boolean vertical) {
             Ship ship = new Ship();
-            ship.p = p;
-            ship.l = l;
+            ship.firstField = firstField;
+            ship.length = length;
             ship.vertical = vertical;
             return ship;
         }
 
-        public Point getP() {
-            return p;
+        public Point getFirstField() {
+            return firstField;
         }
 
-        public int getL() {
-            return l;
+        public int getLength() {
+            return length;
         }
 
         public boolean isVertical() {
             return vertical;
         }
 
-        public void setP(Point p) {
-            this.p = p;
+        public void setFirstField(Point firstField) {
+            this.firstField = firstField;
         }
 
-        public void setL(int l) {
-            this.l = l;
+        public void setLength(int length) {
+            this.length = length;
         }
 
         public void setVertical(boolean vertical) {
@@ -78,11 +78,11 @@ public class Shooter {
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<PointH> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getL(); ++j) {
+            for (int j = 0; j < input.get(i).getLength(); ++j) {
                 if (input.get(i).isVertical()) {
-                    list.add(PointH.of(point(input.get(i).getP().x, input.get(i).getP().y + j), false));
+                    list.add(PointH.of(point(input.get(i).getFirstField().x, input.get(i).getFirstField().y + j), false));
                 } else {
-                    list.add(PointH.of(point(input.get(i).getP().x + j, input.get(i).getP().y), false));
+                    list.add(PointH.of(point(input.get(i).getFirstField().x + j, input.get(i).getFirstField().y), false));
                 }
             }
             data.add(list);
