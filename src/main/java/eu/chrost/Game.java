@@ -9,10 +9,10 @@ import static eu.chrost.Shooter.point;
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
-        List<Shooter.Ship> rv = new ArrayList<>();
+        List<Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(new Shooter.Ship(point(1, 1), 4, true));
-        rv.add(new Shooter.Ship(point(6, 7), 2, false));
+        rv.add(new Ship(point(1, 1), 4, true));
+        rv.add(new Ship(point(6, 7), 2, false));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);

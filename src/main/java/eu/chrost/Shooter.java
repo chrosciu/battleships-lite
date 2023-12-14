@@ -1,8 +1,5 @@
 package eu.chrost;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,14 +27,6 @@ public class Shooter {
             pointH.h = h;
             return pointH;
         }
-    }
-
-    @Getter
-    @RequiredArgsConstructor
-    public static class Ship {
-        private final Point firstField;
-        private final int length;
-        private final boolean vertical;
     }
 
     private List<List<PointH>> data = new ArrayList<>();
