@@ -5,25 +5,26 @@ import java.util.List;
 
 public class Shooter {
 
-    private List<List<ShipField>> data = new ArrayList<>();
+    private final List<List<ShipField>> ships;
 
     /**
      * Initialize shooter with given list of ships on board
      *
-     * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
+     * @param shipDefinitions - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<ShipDefinition> input) {
-        for (int i = 0; i < input.size(); ++i) {
+    public Shooter(List<ShipDefinition> shipDefinitions) {
+        ships = new ArrayList<>();
+        for (int i = 0; i < shipDefinitions.size(); ++i) {
             List<ShipField> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getLength(); ++j) {
-                if (input.get(i).isVertical()) {
-                    list.add(new ShipField(new Field(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
+            for (int j = 0; j < shipDefinitions.get(i).getLength(); ++j) {
+                if (shipDefinitions.get(i).isVertical()) {
+                    list.add(new ShipField(new Field(shipDefinitions.get(i).getFirstField().getX(), shipDefinitions.get(i).getFirstField().getY() + j)));
                 } else {
-                    list.add(new ShipField(new Field(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
+                    list.add(new ShipField(new Field(shipDefinitions.get(i).getFirstField().getX() + j, shipDefinitions.get(i).getFirstField().getY())));
                 }
             }
-            data.add(list);
+            ships.add(list);
         }
     }
 
@@ -36,12 +37,12 @@ public class Shooter {
     public int shoot(Field s) {
         int rv = 0;
         //iterate through all ships
-        for (int i = 0; i < data.size() && 0 == rv; ++i) {
+        for (int i = 0; i < ships.size() && 0 == rv; ++i) {
             //iterate through all ship fields
-            for (int j = 0; j < data.get(i).size() && 0 == rv; ++j) {
+            for (int j = 0; j < ships.get(i).size() && 0 == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getField().getX() == s.getX() && data.get(i).get(j).getField().getY() == s.getY()) {
-                    data.get(i).get(j).markAsHit();
+                if (ships.get(i).get(j).getField().getX() == s.getX() && ships.get(i).get(j).getField().getY() == s.getY()) {
+                    ships.get(i).get(j).markAsHit();
                     rv = 1;
                 }
             }
@@ -49,8 +50,8 @@ public class Shooter {
             if (1 == rv) {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
-                for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).isHit();
+                for (int j = 0; j < ships.get(i).size() && a; ++j) {
+                    a &= ships.get(i).get(j).isHit();
                 }
                 if (a) {
                     rv = 2;
@@ -59,9 +60,9 @@ public class Shooter {
         }
         //check if all ships are sunk
         boolean a = true;
-        for (int i = 0; i < data.size() && a; ++i) {
-            for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).isHit();
+        for (int i = 0; i < ships.size() && a; ++i) {
+            for (int j = 0; j < ships.get(i).size() && a; ++j) {
+                a &= ships.get(i).get(j).isHit();
             }
         }
         if (a) {
