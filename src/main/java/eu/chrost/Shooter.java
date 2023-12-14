@@ -30,15 +30,18 @@ public class Shooter {
     }
 
     public static class Ship {
-        private Point firstField;
-        private int length;
-        private boolean vertical;
+        private final Point firstField;
+        private final int length;
+        private final boolean vertical;
+
+        public Ship(Point firstField, int length, boolean vertical) {
+            this.firstField = firstField;
+            this.length = length;
+            this.vertical = vertical;
+        }
 
         public static Ship of(Point firstField, int length, boolean vertical) {
-            Ship ship = new Ship();
-            ship.firstField = firstField;
-            ship.length = length;
-            ship.vertical = vertical;
+            Ship ship = new Ship(firstField, length, vertical);
             return ship;
         }
 
