@@ -3,7 +3,7 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shooter {
+public class Board {
 
     private final List<List<ShipField>> ships;
 
@@ -13,7 +13,7 @@ public class Shooter {
      * @param shipDefinitions - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<ShipDefinition> shipDefinitions) {
+    public Board(List<ShipDefinition> shipDefinitions) {
         ships = new ArrayList<>();
         for (int i = 0; i < shipDefinitions.size(); ++i) {
             List<ShipField> list = new ArrayList<>();

@@ -7,7 +7,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ShooterTest {
+class BoardTest {
     private static final Field VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD = new Field(3, 4);
     private static final Field VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD = new Field(3, 5);
 
@@ -51,7 +51,7 @@ class ShooterTest {
     @Test
     void whenShootingOnBoardWithNoShipsFinishedResultShouldBeReported() {
         //given
-        Shooter board = new Shooter(NO_SHIP_DEFINITIONS);
+        Board board = new Board(NO_SHIP_DEFINITIONS);
 
         //when
         int result = board.shoot(FIELD_WITHOUT_SHIP);
@@ -63,7 +63,7 @@ class ShooterTest {
     @Test
     public void whenShootingOnBoardWithSingleShipProperStatesShouldBeReported() {
         //given
-        Shooter board = new Shooter(SINGLE_SHIP_DEFINITION);
+        Board board = new Board(SINGLE_SHIP_DEFINITION);
 
         //when
         int result = board.shoot(FIELD_WITHOUT_SHIP);
@@ -87,7 +87,7 @@ class ShooterTest {
     @Test
     public void whenShootingOnBoardWithMultipleShipsProperStatesShouldBeReported() {
         //given
-        Shooter board = new Shooter(FOUR_SHIP_DEFINITIONS);
+        Board board = new Board(FOUR_SHIP_DEFINITIONS);
 
         //when
         int result = board.shoot(FIELD_WITHOUT_SHIP);

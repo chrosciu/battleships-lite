@@ -14,7 +14,7 @@ public class Game {
         rv.add(new ShipDefinition(new Field(1, 1), 4, true));
         rv.add(new ShipDefinition(new Field(6, 7), 2, false));
         //let's start the game
-        Shooter shooter = new Shooter(rv);
+        Board board = new Board(rv);
         Scanner keyboard = new Scanner(System.in);
         //read user shots
         for (;;) {
@@ -24,7 +24,7 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            int r = shooter.shoot(new Field(a, b));
+            int r = board.shoot(new Field(a, b));
             System.out.println(r);
             //if all ships sunk finish the game
             if (3 == r) {
