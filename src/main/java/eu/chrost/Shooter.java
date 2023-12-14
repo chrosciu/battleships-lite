@@ -6,13 +6,13 @@ import java.util.List;
 public class Shooter {
 
     public static class PointH {
-        public Field p;
-        public boolean h;
+        public Field field;
+        public boolean hit;
 
-        public static PointH of(Field p, boolean h) {
+        public static PointH of(Field p, boolean hit) {
             PointH pointH = new PointH();
-            pointH.p = p;
-            pointH.h = h;
+            pointH.field = p;
+            pointH.hit = hit;
             return pointH;
         }
     }
@@ -52,8 +52,8 @@ public class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && 0 == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).p.getX() == s.getX() && data.get(i).get(j).p.getY() == s.getY()) {
-                    data.get(i).get(j).h = true;
+                if (data.get(i).get(j).field.getX() == s.getX() && data.get(i).get(j).field.getY() == s.getY()) {
+                    data.get(i).get(j).hit = true;
                     rv = 1;
                 }
             }
@@ -62,7 +62,7 @@ public class Shooter {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).h;
+                    a &= data.get(i).get(j).hit;
                 }
                 if (a) {
                     rv = 2;
@@ -73,7 +73,7 @@ public class Shooter {
         boolean a = true;
         for (int i = 0; i < data.size() && a; ++i) {
             for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).h;
+                a &= data.get(i).get(j).hit;
             }
         }
         if (a) {
