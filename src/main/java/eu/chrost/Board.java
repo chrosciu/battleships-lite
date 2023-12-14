@@ -33,17 +33,17 @@ public class Board {
     /**
      * Take shot for given field and return shot result
      *
-     * @param s - field coordinates
+     * @param field - field coordinates
      * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
-    public Result shoot(Field s) {
+    public Result shoot(Field field) {
         Result result = MISSED;
         //iterate through all ships
         for (int i = 0; i < ships.size() && MISSED == result; ++i) {
             //iterate through all ship fields
             for (int j = 0; j < ships.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (ships.get(i).get(j).getField().getX() == s.getX() && ships.get(i).get(j).getField().getY() == s.getY()) {
+                if (ships.get(i).get(j).getField().equals(field)) {
                     ships.get(i).get(j).markAsHit();
                     result = HIT;
                 }

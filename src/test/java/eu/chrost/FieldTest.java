@@ -33,5 +33,25 @@ public class FieldTest {
         assertThat(shiftedField.getY()).isEqualTo(5);
     }
 
+    @Test
+    void twoFieldsWithSameCoordinatesShouldBeEqual() {
+        //given
+        var fieldOne = new Field(1, 2);
+        var fieldTwo = new Field(1, 2);
+
+        //when / then
+        assertThat(fieldOne).isEqualTo(fieldTwo);
+    }
+
+    @Test
+    void twoFieldsWithDifferentCoordinatesShouldNotBeEqual() {
+        //given
+        var fieldOne = new Field(1, 2);
+        var fieldTwo = new Field(2, 2);
+
+        //when / then
+        assertThat(fieldOne).isNotEqualTo(fieldTwo);
+    }
+
 
 }
