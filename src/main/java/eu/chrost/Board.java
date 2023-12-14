@@ -2,6 +2,7 @@ package eu.chrost;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static eu.chrost.Result.*;
 
@@ -16,14 +17,12 @@ public class Board {
      *              (true - vertical, false - horizontal)
      */
     public Board(List<ShipDefinition> shipDefinitions) {
-        ships = new ArrayList<>();
-        for (ShipDefinition shipDefinition : shipDefinitions) {
-            List<ShipField> ship = buildShipFromDefinition(shipDefinition);
-            ships.add(ship);
-        }
+        ships = shipDefinitions.stream()
+                .map(shipDefinition -> buildShipFromDefinition(shipDefinition))
+                .collect(Collectors.toList());
     }
 
-    private static List<ShipField> buildShipFromDefinition(ShipDefinition shipDefinition) {
+    private List<ShipField> buildShipFromDefinition(ShipDefinition shipDefinition) {
         List<ShipField> ship = new ArrayList<>();
         for (int j = 0; j < shipDefinition.getLength(); ++j) {
             ship.add(new ShipField(shipDefinition.getFirstField().shiftBy(j, shipDefinition.getOrientation())));
