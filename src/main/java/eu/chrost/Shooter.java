@@ -32,13 +32,13 @@ public class Shooter {
     public static class Ship {
         private Point p;
         private int l;
-        private boolean b;
+        private boolean vertical;
 
-        public static Ship of(Point p, int l, boolean b) {
+        public static Ship of(Point p, int l, boolean vertical) {
             Ship ship = new Ship();
             ship.p = p;
             ship.l = l;
-            ship.b = b;
+            ship.vertical = vertical;
             return ship;
         }
 
@@ -50,8 +50,8 @@ public class Shooter {
             return l;
         }
 
-        public boolean isB() {
-            return b;
+        public boolean isVertical() {
+            return vertical;
         }
 
         public void setP(Point p) {
@@ -62,8 +62,8 @@ public class Shooter {
             this.l = l;
         }
 
-        public void setB(boolean b) {
-            this.b = b;
+        public void setVertical(boolean vertical) {
+            this.vertical = vertical;
         }
     }
 
@@ -79,7 +79,7 @@ public class Shooter {
         for (int i = 0; i < input.size(); ++i) {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
-                if (input.get(i).isB()) {
+                if (input.get(i).isVertical()) {
                     list.add(PointH.of(point(input.get(i).getP().x, input.get(i).getP().y + j), false));
                 } else {
                     list.add(PointH.of(point(input.get(i).getP().x + j, input.get(i).getP().y), false));
