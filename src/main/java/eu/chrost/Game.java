@@ -26,7 +26,7 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            Result r = board.shoot(new Field(a, b));
+            Result r = board.applyShot(new Field(a, b));
             System.out.println(r);
             //if all ships sunk finish the game
             if (FINISHED == r) {

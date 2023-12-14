@@ -10,12 +10,6 @@ public class Board {
 
     private final List<List<ShipField>> ships;
 
-    /**
-     * Initialize shooter with given list of ships on board
-     *
-     * @param shipDefinitions - list of ships. Each ship is described by first field coordinate, length and orientation
-     *              (true - vertical, false - horizontal)
-     */
     public Board(List<ShipDefinition> shipDefinitions) {
         ships = shipDefinitions.stream()
                 .map(shipDefinition -> buildShipFromDefinition(shipDefinition))
@@ -30,46 +24,51 @@ public class Board {
         return ship;
     }
 
-    /**
-     * Take shot for given field and return shot result
-     *
-     * @param field - field coordinates
-     * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
-     */
-    public Result shoot(Field field) {
+    public Result applyShot(Field field) {
         Result result = MISSED;
-        //iterate through all ships
         for (int i = 0; i < ships.size() && MISSED == result; ++i) {
-            //iterate through all ship fields
-            for (int j = 0; j < ships.get(i).size() && MISSED == result; ++j) {
-                //if any of ship fields is equal to passed field - mark as hit
-                if (ships.get(i).get(j).getField().equals(field)) {
-                    ships.get(i).get(j).markAsHit();
-                    result = HIT;
-                }
-            }
-            //if ship is hit - check if it is sunk
-            if (HIT == result) {
-                //iterate through all fields and check if they are all hit
-                boolean a = true;
-                for (int j = 0; j < ships.get(i).size() && a; ++j) {
-                    a &= ships.get(i).get(j).isHit();
-                }
-                if (a) {
-                    result = SUNK;
-                }
-            }
+            List<ShipField> ship = ships.get(i);
+            result = applyShotForShip(field, ship);
         }
-        //check if all ships are sunk
-        boolean a = true;
-        for (int i = 0; i < ships.size() && a; ++i) {
-            for (int j = 0; j < ships.get(i).size() && a; ++j) {
-                a &= ships.get(i).get(j).isHit();
-            }
-        }
-        if (a) {
+        if (areAllShipsSunk()) {
             result = FINISHED;
         }
         return result;
+    }
+
+    private Result applyShotForShip(Field field, List<ShipField> ship) {
+        Result result = MISSED;
+        for (int j = 0; j < ship.size() && MISSED == result; ++j) {
+            ShipField shipField = ship.get(j);
+            if (shipField.getField().equals(field)) {
+                shipField.markAsHit();
+                result = HIT;
+            }
+        }
+        if (HIT == result) {
+            if (isShipSunk(ship)) {
+                result = SUNK;
+            }
+        }
+        return result;
+    }
+
+    private boolean isShipSunk(List<ShipField> ship) {
+        boolean isShipSunk = true;
+        for (int j = 0; j < ship.size() && isShipSunk; ++j) {
+            ShipField shipField = ship.get(j);
+            isShipSunk = shipField.isHit();
+        }
+        return isShipSunk;
+    }
+
+    private boolean areAllShipsSunk() {
+        boolean allShipsSunk = true;
+        for (int i = 0; i < ships.size() && allShipsSunk; ++i) {
+            for (int j = 0; j < ships.get(i).size() && allShipsSunk; ++j) {
+                allShipsSunk = ships.get(i).get(j).isHit();
+            }
+        }
+        return allShipsSunk;
     }
 }

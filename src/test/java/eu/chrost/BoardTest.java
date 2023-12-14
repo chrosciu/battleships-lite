@@ -48,7 +48,7 @@ class BoardTest {
         Board board = new Board(NO_SHIP_DEFINITIONS);
 
         //when
-        Result result = board.shoot(FIELD_WITHOUT_SHIP);
+        Result result = board.applyShot(FIELD_WITHOUT_SHIP);
 
         //then
         assertThat(result).isEqualTo(FINISHED);
@@ -60,19 +60,19 @@ class BoardTest {
         Board board = new Board(SINGLE_SHIP_DEFINITION);
 
         //when
-        Result result = board.shoot(FIELD_WITHOUT_SHIP);
+        Result result = board.applyShot(FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(MISSED, result);
 
         //when
-        result = board.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = board.applyShot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(HIT, result);
 
         //when
-        result = board.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = board.applyShot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
         assertEquals(FINISHED, result);
@@ -84,67 +84,67 @@ class BoardTest {
         Board board = new Board(FOUR_SHIP_DEFINITIONS);
 
         //when
-        Result result = board.shoot(FIELD_WITHOUT_SHIP);
+        Result result = board.applyShot(FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(MISSED, result);
 
         //when
-        result = board.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = board.applyShot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(HIT, result);
 
         //when
-        result = board.shoot(ONE_FIELD_SHIP_FIELD);
+        result = board.applyShot(ONE_FIELD_SHIP_FIELD);
 
         //then
         assertEquals(SUNK, result);
 
         //when
-        result = board.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = board.applyShot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(HIT, result);
 
         //when
-        result = board.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = board.applyShot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
         assertEquals(SUNK, result);
 
         //when
-        result = board.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = board.applyShot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
         assertEquals(SUNK, result);
 
         //when
-        result = board.shoot(ANOTHER_ONE_FIELD_SHIP_FIELD);
+        result = board.applyShot(ANOTHER_ONE_FIELD_SHIP_FIELD);
 
         //then
         assertEquals(SUNK, result);
 
         //when
-        result = board.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = board.applyShot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(HIT, result);
 
         //when
-        result = board.shoot(HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = board.applyShot(HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD);
 
         //then
         assertEquals(FINISHED, result);
 
         //when
-        result = board.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = board.applyShot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
         //then
         assertEquals(FINISHED, result);
 
         //when
-        result = board.shoot(ANOTHER_FIELD_WITHOUT_SHIP);
+        result = board.applyShot(ANOTHER_FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(FINISHED, result);
