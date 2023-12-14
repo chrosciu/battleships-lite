@@ -1,5 +1,8 @@
 package eu.chrost;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,29 +32,12 @@ public class Shooter {
         }
     }
 
+    @Getter
+    @RequiredArgsConstructor
     public static class Ship {
         private final Point firstField;
         private final int length;
         private final boolean vertical;
-
-        public Ship(Point firstField, int length, boolean vertical) {
-            this.firstField = firstField;
-            this.length = length;
-            this.vertical = vertical;
-        }
-
-        public Point getFirstField() {
-            return firstField;
-        }
-
-        public int getLength() {
-            return length;
-        }
-
-        public boolean isVertical() {
-            return vertical;
-        }
-
     }
 
     private List<List<PointH>> data = new ArrayList<>();
