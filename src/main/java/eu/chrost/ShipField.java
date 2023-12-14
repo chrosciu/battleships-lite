@@ -3,11 +3,11 @@ package eu.chrost;
 import lombok.Getter;
 
 @Getter
-public class PointH {
+public class ShipField {
     private final Field field;
     private boolean hit;
 
-    public PointH(Field field) {
+    public ShipField(Field field) {
         this.field = field;
         this.hit = false;
     }

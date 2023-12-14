@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Shooter {
 
-    private List<List<PointH>> data = new ArrayList<>();
+    private List<List<ShipField>> data = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -15,12 +15,12 @@ public class Shooter {
      */
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<PointH> list = new ArrayList<>();
+            List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {
                 if (input.get(i).isVertical()) {
-                    list.add(new PointH(new Field(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
+                    list.add(new ShipField(new Field(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
                 } else {
-                    list.add(new PointH(new Field(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
+                    list.add(new ShipField(new Field(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
                 }
             }
             data.add(list);
