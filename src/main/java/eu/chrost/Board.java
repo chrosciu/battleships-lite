@@ -17,13 +17,18 @@ public class Board {
      */
     public Board(List<ShipDefinition> shipDefinitions) {
         ships = new ArrayList<>();
-        for (int i = 0; i < shipDefinitions.size(); ++i) {
-            List<ShipField> list = new ArrayList<>();
-            for (int j = 0; j < shipDefinitions.get(i).getLength(); ++j) {
-                list.add(new ShipField(shipDefinitions.get(i).getFirstField().shiftBy(j, shipDefinitions.get(i).getOrientation())));
-            }
-            ships.add(list);
+        for (ShipDefinition shipDefinition : shipDefinitions) {
+            List<ShipField> ship = buildShipFromDefinition(shipDefinition);
+            ships.add(ship);
         }
+    }
+
+    private static List<ShipField> buildShipFromDefinition(ShipDefinition shipDefinition) {
+        List<ShipField> ship = new ArrayList<>();
+        for (int j = 0; j < shipDefinition.getLength(); ++j) {
+            ship.add(new ShipField(shipDefinition.getFirstField().shiftBy(j, shipDefinition.getOrientation())));
+        }
+        return ship;
     }
 
     /**
