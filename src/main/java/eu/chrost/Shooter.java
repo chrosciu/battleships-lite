@@ -1,8 +1,5 @@
 package eu.chrost;
 
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Triple;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +17,57 @@ public class Shooter {
         return point;
     }
 
-    private List<List<MutablePair<Point, Boolean>>> data = new ArrayList<>();
+    public static class PointH {
+        public Point p;
+        public boolean h;
+
+        public static PointH of(Point p, boolean h) {
+            PointH pointH = new PointH();
+            pointH.p = p;
+            pointH.h = h;
+            return pointH;
+        }
+    }
+
+    public static class Ship {
+        private Point p;
+        private int l;
+        private boolean b;
+
+        public static Ship of(Point p, int l, boolean b) {
+            Ship ship = new Ship();
+            ship.p = p;
+            ship.l = l;
+            ship.b = b;
+            return ship;
+        }
+
+        public Point getP() {
+            return p;
+        }
+
+        public int getL() {
+            return l;
+        }
+
+        public boolean isB() {
+            return b;
+        }
+
+        public void setP(Point p) {
+            this.p = p;
+        }
+
+        public void setL(int l) {
+            this.l = l;
+        }
+
+        public void setB(boolean b) {
+            this.b = b;
+        }
+    }
+
+    private List<List<PointH>> data = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -28,14 +75,14 @@ public class Shooter {
      * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Triple<Point, Integer, Boolean>> input) {
+    public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<MutablePair<Point, Boolean>> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getMiddle(); ++j) {
-                if (input.get(i).getRight()) {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x, input.get(i).getLeft().y + j), false));
+            List<PointH> list = new ArrayList<>();
+            for (int j = 0; j < input.get(i).getL(); ++j) {
+                if (input.get(i).isB()) {
+                    list.add(PointH.of(point(input.get(i).getP().x, input.get(i).getP().y + j), false));
                 } else {
-                    list.add(MutablePair.of(point(input.get(i).getLeft().x + j, input.get(i).getLeft().y), false));
+                    list.add(PointH.of(point(input.get(i).getP().x + j, input.get(i).getP().y), false));
                 }
             }
             data.add(list);
@@ -55,8 +102,8 @@ public class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && 0 == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getLeft().x == s.x && data.get(i).get(j).getLeft().y == s.y) {
-                    data.get(i).get(j).setRight(true);
+                if (data.get(i).get(j).p.x == s.x && data.get(i).get(j).p.y == s.y) {
+                    data.get(i).get(j).h = true;
                     rv = 1;
                 }
             }
@@ -65,7 +112,7 @@ public class Shooter {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).getRight();
+                    a &= data.get(i).get(j).h;
                 }
                 if (a) {
                     rv = 2;
@@ -76,7 +123,7 @@ public class Shooter {
         boolean a = true;
         for (int i = 0; i < data.size() && a; ++i) {
             for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).getRight();
+                a &= data.get(i).get(j).h;
             }
         }
         if (a) {
