@@ -31,13 +31,13 @@ class ShooterTest {
     private static final int TWO_FIELDS_SHIP_SIZE = 2;
 
     private static final Ship VERTICAL_TWO_FIELDS_SHIP =
-            Ship.of(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, VERTICAL);
+            new Ship(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, VERTICAL);
     private static final Ship ONE_FIELD_SHIP =
-            Ship.of(ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, HORIZONTAL);
+            new Ship(ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, HORIZONTAL);
     private static final Ship ANOTHER_ONE_FIELD_SHIP =
-            Ship.of(ANOTHER_ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, VERTICAL);
+            new Ship(ANOTHER_ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, VERTICAL);
     private static final Ship HORIZONTAL_TWO_FIELDS_SHIP =
-            Ship.of(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, HORIZONTAL);
+            new Ship(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, HORIZONTAL);
 
     private static final List<Ship> NO_SHIPS =
             List.of();

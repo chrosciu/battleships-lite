@@ -40,11 +40,6 @@ public class Shooter {
             this.vertical = vertical;
         }
 
-        public static Ship of(Point firstField, int length, boolean vertical) {
-            Ship ship = new Ship(firstField, length, vertical);
-            return ship;
-        }
-
         public Point getFirstField() {
             return firstField;
         }
