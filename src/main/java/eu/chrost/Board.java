@@ -1,6 +1,5 @@
 package eu.chrost;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,7 +7,7 @@ import static eu.chrost.Result.*;
 
 public class Board {
 
-    private final List<List<ShipField>> ships;
+    private final List<Ship> ships;
 
     public Board(List<ShipDefinition> shipDefinitions) {
         ships = shipDefinitions.stream()
@@ -16,10 +15,10 @@ public class Board {
                 .collect(Collectors.toList());
     }
 
-    private List<ShipField> buildShipFromDefinition(ShipDefinition shipDefinition) {
-        List<ShipField> ship = new ArrayList<>();
+    private Ship buildShipFromDefinition(ShipDefinition shipDefinition) {
+        Ship ship = new Ship();
         for (int j = 0; j < shipDefinition.getLength(); ++j) {
-            ship.add(new ShipField(shipDefinition.getFirstField().shiftBy(j, shipDefinition.getOrientation())));
+            ship.appendField(new ShipField(shipDefinition.getFirstField().shiftBy(j, shipDefinition.getOrientation())));
         }
         return ship;
     }
@@ -27,7 +26,7 @@ public class Board {
     public Result applyShot(Field field) {
         Result result = MISSED;
         for (int i = 0; i < ships.size() && MISSED == result; ++i) {
-            List<ShipField> ship = ships.get(i);
+            Ship ship = ships.get(i);
             result = applyShotForShip(field, ship);
         }
         if (areAllShipsSunk()) {
@@ -36,10 +35,10 @@ public class Board {
         return result;
     }
 
-    private Result applyShotForShip(Field field, List<ShipField> ship) {
+    private Result applyShotForShip(Field field, Ship ship) {
         Result result = MISSED;
-        for (int j = 0; j < ship.size() && MISSED == result; ++j) {
-            ShipField shipField = ship.get(j);
+        for (int j = 0; j < ship.length() && MISSED == result; ++j) {
+            ShipField shipField = ship.getField(j);
             if (shipField.getField().equals(field)) {
                 shipField.markAsHit();
                 result = HIT;
@@ -53,10 +52,10 @@ public class Board {
         return result;
     }
 
-    private boolean isShipSunk(List<ShipField> ship) {
+    private boolean isShipSunk(Ship ship) {
         boolean isShipSunk = true;
-        for (int j = 0; j < ship.size() && isShipSunk; ++j) {
-            ShipField shipField = ship.get(j);
+        for (int j = 0; j < ship.length() && isShipSunk; ++j) {
+            ShipField shipField = ship.getField(j);
             isShipSunk = shipField.isHit();
         }
         return isShipSunk;
@@ -65,8 +64,8 @@ public class Board {
     private boolean areAllShipsSunk() {
         boolean allShipsSunk = true;
         for (int i = 0; i < ships.size() && allShipsSunk; ++i) {
-            for (int j = 0; j < ships.get(i).size() && allShipsSunk; ++j) {
-                allShipsSunk = ships.get(i).get(j).isHit();
+            for (int j = 0; j < ships.get(i).length() && allShipsSunk; ++j) {
+                allShipsSunk = ships.get(i).getField(j).isHit();
             }
         }
         return allShipsSunk;
