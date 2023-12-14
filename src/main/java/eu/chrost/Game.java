@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static eu.chrost.Result.FINISHED;
 
 
 public class Game {
@@ -27,7 +28,7 @@ public class Game {
             Result r = board.shoot(new Field(a, b));
             System.out.println(r);
             //if all ships sunk finish the game
-            if (3 == r.getRank()) {
+            if (FINISHED == r) {
                 break;
             }
         }
