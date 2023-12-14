@@ -3,19 +3,18 @@ package eu.chrost;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.FormattableFlags;
 import java.util.List;
 
 public class Shooter {
 
-    @RequiredArgsConstructor
     public static class PointH {
         private final Field field;
         private boolean hit;
 
-        public static PointH of(Field field) {
-            PointH pointH = new PointH(field);
-            pointH.hit = false;
-            return pointH;
+        public PointH(Field field) {
+            this.field = field;
+            this.hit = false;
         }
     }
 
@@ -32,9 +31,9 @@ public class Shooter {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {
                 if (input.get(i).isVertical()) {
-                    list.add(PointH.of(new Field(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
+                    list.add(new PointH(new Field(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
                 } else {
-                    list.add(PointH.of(new Field(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
+                    list.add(new PointH(new Field(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
                 }
             }
             data.add(list);
