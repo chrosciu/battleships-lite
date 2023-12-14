@@ -43,10 +43,10 @@ class BoardTest {
     private static final List<ShipDefinition> FOUR_SHIP_DEFINITIONS =
             List.of(VERTICAL_TWO_FIELDS_SHIP_DEFINITION, ONE_FIELD_SHIP_DEFINITION, ANOTHER_ONE_FIELD_SHIP_DEFINITION, HORIZONTAL_TWO_FIELDS_SHIP_DEFINITION);
 
-    private static final int MISSED = 0;
-    private static final int HIT = 1;
-    private static final int SUNK = 2;
-    private static final int FINISHED = 3;
+    private static final int MISSED = Result.MISSED.getRank();
+    private static final int HIT = Result.HIT.getRank();
+    private static final int SUNK = Result.SUNK.getRank();
+    private static final int FINISHED = Result.FINISHED.getRank();
 
     @Test
     void whenShootingOnBoardWithNoShipsFinishedResultShouldBeReported() {
