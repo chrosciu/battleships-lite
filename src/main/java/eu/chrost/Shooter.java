@@ -1,22 +1,9 @@
 package eu.chrost;
 
-import lombok.RequiredArgsConstructor;
-
 import java.util.ArrayList;
-import java.util.FormattableFlags;
 import java.util.List;
 
 public class Shooter {
-
-    public static class PointH {
-        private final Field field;
-        private boolean hit;
-
-        public PointH(Field field) {
-            this.field = field;
-            this.hit = false;
-        }
-    }
 
     private List<List<PointH>> data = new ArrayList<>();
 
@@ -53,8 +40,8 @@ public class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && 0 == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).field.getX() == s.getX() && data.get(i).get(j).field.getY() == s.getY()) {
-                    data.get(i).get(j).hit = true;
+                if (data.get(i).get(j).getField().getX() == s.getX() && data.get(i).get(j).getField().getY() == s.getY()) {
+                    data.get(i).get(j).markAsHit();
                     rv = 1;
                 }
             }
@@ -63,7 +50,7 @@ public class Shooter {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).hit;
+                    a &= data.get(i).get(j).isHit();
                 }
                 if (a) {
                     rv = 2;
@@ -74,7 +61,7 @@ public class Shooter {
         boolean a = true;
         for (int i = 0; i < data.size() && a; ++i) {
             for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).hit;
+                a &= data.get(i).get(j).isHit();
             }
         }
         if (a) {
