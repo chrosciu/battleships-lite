@@ -13,7 +13,7 @@ public class Shooter {
      * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
      *              (true - vertical, false - horizontal)
      */
-    public Shooter(List<Ship> input) {
+    public Shooter(List<ShipDefinition> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {

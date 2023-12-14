@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class Ship {
+public class ShipDefinition {
     private final Field firstField;
     private final int length;
     private final boolean vertical;
