@@ -1,27 +1,25 @@
 package eu.chrost;
 
-import eu.chrost.Shooter.Point;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static eu.chrost.Shooter.point;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ShooterTest {
-    private static final Point VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD = point(3, 4);
-    private static final Point VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD = point(3, 5);
+    private static final Field VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD = new Field(3, 4);
+    private static final Field VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD = new Field(3, 5);
 
-    private static final Point ONE_FIELD_SHIP_FIELD = point(7, 2);
+    private static final Field ONE_FIELD_SHIP_FIELD = new Field(7, 2);
 
-    private static final Point ANOTHER_ONE_FIELD_SHIP_FIELD = point(6, 5);
+    private static final Field ANOTHER_ONE_FIELD_SHIP_FIELD = new Field(6, 5);
 
-    private static final Point HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD = point(1, 1);
-    private static final Point HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD = point(2, 1);
+    private static final Field HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD = new Field(1, 1);
+    private static final Field HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD = new Field(2, 1);
 
-    private static final Point FIELD_WITHOUT_SHIP = point(1, 2);
-    private static final Point ANOTHER_FIELD_WITHOUT_SHIP = point(4, 4);
+    private static final Field FIELD_WITHOUT_SHIP = new Field(1, 2);
+    private static final Field ANOTHER_FIELD_WITHOUT_SHIP = new Field(4, 4);
 
     private static final boolean VERTICAL = true;
     private static final boolean HORIZONTAL = false;
