@@ -10,11 +10,11 @@ public class Shooter {
     @RequiredArgsConstructor
     public static class PointH {
         private final Field field;
-        public boolean hit;
+        private boolean hit;
 
-        public static PointH of(Field field, boolean hit) {
+        public static PointH of(Field field) {
             PointH pointH = new PointH(field);
-            pointH.hit = hit;
+            pointH.hit = false;
             return pointH;
         }
     }
@@ -32,9 +32,9 @@ public class Shooter {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {
                 if (input.get(i).isVertical()) {
-                    list.add(PointH.of(new Field(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j), false));
+                    list.add(PointH.of(new Field(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
                 } else {
-                    list.add(PointH.of(new Field(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY()), false));
+                    list.add(PointH.of(new Field(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
                 }
             }
             data.add(list);
