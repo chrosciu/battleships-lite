@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static eu.chrost.Result.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -43,18 +44,13 @@ class BoardTest {
     private static final List<ShipDefinition> FOUR_SHIP_DEFINITIONS =
             List.of(VERTICAL_TWO_FIELDS_SHIP_DEFINITION, ONE_FIELD_SHIP_DEFINITION, ANOTHER_ONE_FIELD_SHIP_DEFINITION, HORIZONTAL_TWO_FIELDS_SHIP_DEFINITION);
 
-    private static final int MISSED = Result.MISSED.getRank();
-    private static final int HIT = Result.HIT.getRank();
-    private static final int SUNK = Result.SUNK.getRank();
-    private static final int FINISHED = Result.FINISHED.getRank();
-
     @Test
     void whenShootingOnBoardWithNoShipsFinishedResultShouldBeReported() {
         //given
         Board board = new Board(NO_SHIP_DEFINITIONS);
 
         //when
-        int result = board.shoot(FIELD_WITHOUT_SHIP);
+        Result result = board.shoot(FIELD_WITHOUT_SHIP);
 
         //then
         assertThat(result).isEqualTo(FINISHED);
@@ -66,7 +62,7 @@ class BoardTest {
         Board board = new Board(SINGLE_SHIP_DEFINITION);
 
         //when
-        int result = board.shoot(FIELD_WITHOUT_SHIP);
+        Result result = board.shoot(FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(MISSED, result);
@@ -90,7 +86,7 @@ class BoardTest {
         Board board = new Board(FOUR_SHIP_DEFINITIONS);
 
         //when
-        int result = board.shoot(FIELD_WITHOUT_SHIP);
+        Result result = board.shoot(FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(MISSED, result);

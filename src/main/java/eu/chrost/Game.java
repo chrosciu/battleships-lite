@@ -24,10 +24,10 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            int r = board.shoot(new Field(a, b));
+            Result r = board.shoot(new Field(a, b));
             System.out.println(r);
             //if all ships sunk finish the game
-            if (3 == r) {
+            if (3 == r.getRank()) {
                 break;
             }
         }
