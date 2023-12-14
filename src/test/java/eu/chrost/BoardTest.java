@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static eu.chrost.Orientation.*;
 import static eu.chrost.Result.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,9 +22,6 @@ class BoardTest {
 
     private static final Field FIELD_WITHOUT_SHIP = new Field(1, 2);
     private static final Field ANOTHER_FIELD_WITHOUT_SHIP = new Field(4, 4);
-
-    private static final boolean VERTICAL = true;
-    private static final boolean HORIZONTAL = false;
 
     private static final int ONE_FIELD_SHIP_SIZE = 1;
     private static final int TWO_FIELDS_SHIP_SIZE = 2;

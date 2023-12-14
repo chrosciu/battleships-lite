@@ -3,6 +3,7 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
+import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.*;
 
 public class Board {
@@ -20,7 +21,7 @@ public class Board {
         for (int i = 0; i < shipDefinitions.size(); ++i) {
             List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < shipDefinitions.get(i).getLength(); ++j) {
-                if (shipDefinitions.get(i).isVertical()) {
+                if (VERTICAL == shipDefinitions.get(i).getOrientation()) {
                     list.add(new ShipField(new Field(shipDefinitions.get(i).getFirstField().getX(), shipDefinitions.get(i).getFirstField().getY() + j)));
                 } else {
                     list.add(new ShipField(new Field(shipDefinitions.get(i).getFirstField().getX() + j, shipDefinitions.get(i).getFirstField().getY())));

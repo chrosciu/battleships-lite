@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static eu.chrost.Orientation.*;
 import static eu.chrost.Result.FINISHED;
 
 
@@ -12,8 +13,8 @@ public class Game {
         //create empty ship list...
         List<ShipDefinition> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(new ShipDefinition(new Field(1, 1), 4, true));
-        rv.add(new ShipDefinition(new Field(6, 7), 2, false));
+        rv.add(new ShipDefinition(new Field(1, 1), 4, VERTICAL));
+        rv.add(new ShipDefinition(new Field(6, 7), 2, HORIZONTAL));
         //let's start the game
         Board board = new Board(rv);
         Scanner keyboard = new Scanner(System.in);

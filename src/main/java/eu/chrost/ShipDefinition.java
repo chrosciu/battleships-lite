@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class ShipDefinition {
     private final Field firstField;
     private final int length;
-    private final boolean vertical;
+    private final Orientation orientation;
 }
