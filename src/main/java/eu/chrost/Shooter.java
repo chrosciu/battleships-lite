@@ -1,17 +1,19 @@
 package eu.chrost;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Shooter {
 
+    @RequiredArgsConstructor
     public static class PointH {
-        public Field field;
+        private final Field field;
         public boolean hit;
 
-        public static PointH of(Field p, boolean hit) {
-            PointH pointH = new PointH();
-            pointH.field = p;
+        public static PointH of(Field field, boolean hit) {
+            PointH pointH = new PointH(field);
             pointH.hit = hit;
             return pointH;
         }
