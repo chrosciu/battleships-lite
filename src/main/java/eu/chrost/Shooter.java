@@ -54,17 +54,6 @@ public class Shooter {
             return vertical;
         }
 
-        public void setFirstField(Point firstField) {
-            this.firstField = firstField;
-        }
-
-        public void setLength(int length) {
-            this.length = length;
-        }
-
-        public void setVertical(boolean vertical) {
-            this.vertical = vertical;
-        }
     }
 
     private List<List<PointH>> data = new ArrayList<>();
