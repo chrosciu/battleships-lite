@@ -3,6 +3,11 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
+import static eu.chrost.Result.FINISHED;
+import static eu.chrost.Result.HIT;
+import static eu.chrost.Result.MISSED;
+import static eu.chrost.Result.SUNK;
+
 public class Shooter {
 
     public static class Point {
@@ -92,30 +97,30 @@ public class Shooter {
     /**
      * Take shot for given field and return shot result
      *
-     * @param s - field coordinates
+     * @param point - field coordinates
      * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
-    public int shoot(Point s) {
-        int rv = 0;
+    public Result takeShot(Point point) {
+        var result = MISSED;
         //iterate through all ships
-        for (int i = 0; i < data.size() && 0 == rv; ++i) {
+        for (int i = 0; i < data.size() && MISSED == result; ++i) {
             //iterate through all ship fields
-            for (int j = 0; j < data.get(i).size() && 0 == rv; ++j) {
+            for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).p.x == s.x && data.get(i).get(j).p.y == s.y) {
+                if (data.get(i).get(j).p.x == point.x && data.get(i).get(j).p.y == point.y) {
                     data.get(i).get(j).h = true;
-                    rv = 1;
+                    result = HIT;
                 }
             }
             //if ship is hit - check if it is sunk
-            if (1 == rv) {
+            if (HIT == result) {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
                     a &= data.get(i).get(j).h;
                 }
                 if (a) {
-                    rv = 2;
+                    result = SUNK;
                 }
             }
         }
@@ -127,8 +132,8 @@ public class Shooter {
             }
         }
         if (a) {
-            rv = 3;
+            result = FINISHED;
         }
-        return rv;
+        return result;
     }
 }
