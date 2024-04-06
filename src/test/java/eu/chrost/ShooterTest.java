@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static eu.chrost.Orientation.HORIZONTAL;
+import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
@@ -27,9 +29,6 @@ class ShooterTest {
 
     private static final Point FIELD_WITHOUT_SHIP = point(1, 2);
     private static final Point ANOTHER_FIELD_WITHOUT_SHIP = point(4, 4);
-
-    private static final boolean VERTICAL = true;
-    private static final boolean HORIZONTAL = false;
 
     private static final int ONE_FIELD_SHIP_SIZE = 1;
     private static final int TWO_FIELDS_SHIP_SIZE = 2;
