@@ -14,10 +14,6 @@ enum Result {
         this.rank = rank;
     }
 
-    int getRank() {
-        return rank;
-    }
-
     public static Result fromRank(int rank) {
         return Arrays.stream(values())
                 .filter(result -> rank == result.rank)
