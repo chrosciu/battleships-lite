@@ -12,8 +12,8 @@ import static eu.chrost.Result.SUNK;
 class Shooter {
 
     public static class Point {
-        public int x;
-        public int y;
+        private int x;
+        private int y;
     }
 
     public static Point point(int x, int y) {
