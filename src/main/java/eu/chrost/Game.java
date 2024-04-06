@@ -9,7 +9,7 @@ import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Shooter.point;
 
-public class Game {
+class Game {
     public static void main(String[] args) {
         //create empty ship list...
         List<Shooter.Ship> rv = new ArrayList<>();

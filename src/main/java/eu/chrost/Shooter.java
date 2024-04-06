@@ -9,7 +9,7 @@ import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
 import static eu.chrost.Result.SUNK;
 
-public class Shooter {
+class Shooter {
 
     public static class Point {
         public int x;
@@ -99,7 +99,6 @@ public class Shooter {
      * Take shot for given field and return shot result
      *
      * @param s - field coordinates
-     * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
     public Result shoot(Point s) {
         var result = MISSED;
