@@ -10,44 +10,6 @@ import static eu.chrost.Result.SUNK;
 
 public class Shooter {
 
-    public static class Ship {
-        private Field p;
-        private int l;
-        private Orientation orientation;
-
-        public static Ship of(Field p, int l, Orientation orientation) {
-            Ship ship = new Ship();
-            ship.p = p;
-            ship.l = l;
-            ship.orientation = orientation;
-            return ship;
-        }
-
-        public Field getP() {
-            return p;
-        }
-
-        public int getL() {
-            return l;
-        }
-
-        public Orientation getOrientation() {
-            return orientation;
-        }
-
-        public void setP(Field p) {
-            this.p = p;
-        }
-
-        public void setL(int l) {
-            this.l = l;
-        }
-
-        public void setOrientation(Orientation orientation) {
-            this.orientation = orientation;
-        }
-    }
-
     private List<List<ShipField>> data = new ArrayList<>();
 
     /**
@@ -59,8 +21,8 @@ public class Shooter {
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<ShipField> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getL(); ++j) {
-                Field shiftedField = input.get(i).getP().shift(j, input.get(i).getOrientation());
+            for (int j = 0; j < input.get(i).getLength(); ++j) {
+                Field shiftedField = input.get(i).getFirstField().shift(j, input.get(i).getOrientation());
                 list.add(ShipField.of(shiftedField));
             }
             data.add(list);

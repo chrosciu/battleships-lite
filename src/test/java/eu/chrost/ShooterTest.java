@@ -1,6 +1,5 @@
 package eu.chrost;
 
-import eu.chrost.Shooter.Ship;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
@@ -8,13 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static eu.chrost.Field.of;
 import static eu.chrost.Orientation.HORIZONTAL;
 import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
 import static eu.chrost.Result.SUNK;
-import static eu.chrost.Field.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

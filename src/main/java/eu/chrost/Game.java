@@ -12,10 +12,10 @@ import static eu.chrost.Field.of;
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
-        List<Shooter.Ship> rv = new ArrayList<>();
+        List<Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Shooter.Ship.of(of(1, 1), 4, VERTICAL));
-        rv.add(Shooter.Ship.of(of(6, 7), 2, HORIZONTAL));
+        rv.add(Ship.of(Field.of(1, 1), 4, VERTICAL));
+        rv.add(Ship.of(Field.of(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
