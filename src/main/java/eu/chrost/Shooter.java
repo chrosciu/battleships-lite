@@ -23,44 +23,6 @@ class Shooter {
         }
     }
 
-    public static class Ship {
-        private Field p;
-        private int l;
-        private Orientation orientation;
-
-        public static Ship of(Field p, int l, Orientation orientation) {
-            Ship ship = new Ship();
-            ship.p = p;
-            ship.l = l;
-            ship.orientation = orientation;
-            return ship;
-        }
-
-        public Field getP() {
-            return p;
-        }
-
-        public int getL() {
-            return l;
-        }
-
-        public Orientation getOrientation() {
-            return orientation;
-        }
-
-        public void setP(Field p) {
-            this.p = p;
-        }
-
-        public void setL(int l) {
-            this.l = l;
-        }
-
-        public void setOrientation(Orientation orientation) {
-            this.orientation = orientation;
-        }
-    }
-
     private List<List<PointH>> data = new ArrayList<>();
 
     /**
@@ -72,11 +34,11 @@ class Shooter {
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<PointH> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getL(); ++j) {
+            for (int j = 0; j < input.get(i).getLength(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(Field.of(input.get(i).getP().getX(), input.get(i).getP().getY() + j), false));
+                    list.add(PointH.of(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j), false));
                 } else {
-                    list.add(PointH.of(Field.of(input.get(i).getP().getX() + j, input.get(i).getP().getY()), false));
+                    list.add(PointH.of(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY()), false));
                 }
             }
             data.add(list);

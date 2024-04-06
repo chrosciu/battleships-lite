@@ -1,6 +1,5 @@
 package eu.chrost;
 
-import eu.chrost.Shooter.Ship;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
