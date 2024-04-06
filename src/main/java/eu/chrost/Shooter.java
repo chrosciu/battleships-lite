@@ -3,6 +3,11 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
+import static eu.chrost.Result.FINISHED;
+import static eu.chrost.Result.HIT;
+import static eu.chrost.Result.MISSED;
+import static eu.chrost.Result.SUNK;
+
 public class Shooter {
 
     public static class Point {
@@ -96,26 +101,26 @@ public class Shooter {
      * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
     public Result shoot(Point s) {
-        Result rv = Result.fromRank(0);
+        Result rv = MISSED;
         //iterate through all ships
-        for (int i = 0; i < data.size() && Result.fromRank(0) == rv; ++i) {
+        for (int i = 0; i < data.size() && MISSED == rv; ++i) {
             //iterate through all ship fields
-            for (int j = 0; j < data.get(i).size() && Result.fromRank(0) == rv; ++j) {
+            for (int j = 0; j < data.get(i).size() && MISSED == rv; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
                 if (data.get(i).get(j).p.x == s.x && data.get(i).get(j).p.y == s.y) {
                     data.get(i).get(j).h = true;
-                    rv = Result.fromRank(1);
+                    rv = HIT;
                 }
             }
             //if ship is hit - check if it is sunk
-            if (Result.fromRank(1) == rv) {
+            if (HIT == rv) {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
                     a &= data.get(i).get(j).h;
                 }
                 if (a) {
-                    rv = Result.fromRank(2);
+                    rv = SUNK;
                 }
             }
         }
@@ -127,7 +132,7 @@ public class Shooter {
             }
         }
         if (a) {
-            rv = Result.fromRank(3);
+            rv = FINISHED;
         }
         return rv;
     }
