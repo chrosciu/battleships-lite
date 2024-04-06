@@ -3,6 +3,7 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
+import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
@@ -37,13 +38,13 @@ class Shooter {
     public static class Ship {
         private Point p;
         private int l;
-        private boolean b;
+        private Orientation orientation;
 
-        public static Ship of(Point p, int l, boolean b) {
+        public static Ship of(Point p, int l, Orientation orientation) {
             Ship ship = new Ship();
             ship.p = p;
             ship.l = l;
-            ship.b = b;
+            ship.orientation = orientation;
             return ship;
         }
 
@@ -55,8 +56,8 @@ class Shooter {
             return l;
         }
 
-        public boolean isB() {
-            return b;
+        public Orientation getOrientation() {
+            return orientation;
         }
 
         public void setP(Point p) {
@@ -67,8 +68,8 @@ class Shooter {
             this.l = l;
         }
 
-        public void setB(boolean b) {
-            this.b = b;
+        public void setOrientation(Orientation orientation) {
+            this.orientation = orientation;
         }
     }
 
@@ -84,7 +85,7 @@ class Shooter {
         for (int i = 0; i < input.size(); ++i) {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
-                if (input.get(i).isB()) {
+                if (input.get(i).getOrientation() == VERTICAL) {
                     list.add(PointH.of(point(input.get(i).getP().x, input.get(i).getP().y + j), false));
                 } else {
                     list.add(PointH.of(point(input.get(i).getP().x + j, input.get(i).getP().y), false));
