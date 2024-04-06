@@ -12,7 +12,7 @@ import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
 import static eu.chrost.Result.SUNK;
-import static eu.chrost.Shooter.point;
+import static eu.chrost.Shooter.Point.point;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
