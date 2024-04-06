@@ -11,37 +11,31 @@ import static eu.chrost.Result.SUNK;
 
 class Shooter {
 
-    private List<List<ShipField>> data = new ArrayList<>();
+    private List<Ship> ships = new ArrayList<>();
 
-    /**
-     * Initialize shooter with given list of ships on board
-     *
-     * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
-     *              (true - vertical, false - horizontal)
-     */
-    public Shooter(List<ShipDefinition> input) {
-        for (int i = 0; i < input.size(); ++i) {
-            List<ShipField> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getLength(); ++j) {
-                if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(ShipField.of(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
+    public Shooter(List<ShipDefinition> shipDefinitions) {
+        for (int i = 0; i < shipDefinitions.size(); ++i) {
+            Ship ship = new Ship();
+            for (int j = 0; j < shipDefinitions.get(i).getLength(); ++j) {
+                if (shipDefinitions.get(i).getOrientation() == VERTICAL) {
+                    ship.add(ShipField.of(Field.of(shipDefinitions.get(i).getFirstField().getX(), shipDefinitions.get(i).getFirstField().getY() + j)));
                 } else {
-                    list.add(ShipField.of(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
+                    ship.add(ShipField.of(Field.of(shipDefinitions.get(i).getFirstField().getX() + j, shipDefinitions.get(i).getFirstField().getY())));
                 }
             }
-            data.add(list);
+            ships.add(ship);
         }
     }
 
     public Result shoot(Field s) {
         var result = MISSED;
         //iterate through all ships
-        for (int i = 0; i < data.size() && MISSED == result; ++i) {
+        for (int i = 0; i < ships.size() && MISSED == result; ++i) {
             //iterate through all ship fields
-            for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
+            for (int j = 0; j < ships.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getField().getX() == s.getX() && data.get(i).get(j).getField().getY() == s.getY()) {
-                    data.get(i).get(j).markAsHit();
+                if (ships.get(i).get(j).getField().getX() == s.getX() && ships.get(i).get(j).getField().getY() == s.getY()) {
+                    ships.get(i).get(j).markAsHit();
                     result = HIT;
                 }
             }
@@ -49,8 +43,8 @@ class Shooter {
             if (HIT == result) {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
-                for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).isHit();
+                for (int j = 0; j < ships.get(i).size() && a; ++j) {
+                    a &= ships.get(i).get(j).isHit();
                 }
                 if (a) {
                     result = SUNK;
@@ -59,9 +53,9 @@ class Shooter {
         }
         //check if all ships are sunk
         boolean a = true;
-        for (int i = 0; i < data.size() && a; ++i) {
-            for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).isHit();
+        for (int i = 0; i < ships.size() && a; ++i) {
+            for (int j = 0; j < ships.get(i).size() && a; ++j) {
+                a &= ships.get(i).get(j).isHit();
             }
         }
         if (a) {
