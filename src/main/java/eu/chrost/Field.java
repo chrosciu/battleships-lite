@@ -1,11 +1,11 @@
 package eu.chrost;
 
-class Point {
+class Field {
     private final int x;
     private final int y;
 
-    public static Point of(int x, int y) {
-        return new Point(x, y);
+    public static Field of(int x, int y) {
+        return new Field(x, y);
     }
 
     public int getX() {
@@ -16,7 +16,7 @@ class Point {
         return y;
     }
 
-    private Point(int x, int y) {
+    private Field(int x, int y) {
         this.x = x;
         this.y = y;
     }

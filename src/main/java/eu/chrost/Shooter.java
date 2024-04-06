@@ -12,10 +12,10 @@ import static eu.chrost.Result.SUNK;
 class Shooter {
 
     public static class PointH {
-        public Point p;
+        public Field p;
         public boolean h;
 
-        public static PointH of(Point p, boolean h) {
+        public static PointH of(Field p, boolean h) {
             PointH pointH = new PointH();
             pointH.p = p;
             pointH.h = h;
@@ -24,11 +24,11 @@ class Shooter {
     }
 
     public static class Ship {
-        private Point p;
+        private Field p;
         private int l;
         private Orientation orientation;
 
-        public static Ship of(Point p, int l, Orientation orientation) {
+        public static Ship of(Field p, int l, Orientation orientation) {
             Ship ship = new Ship();
             ship.p = p;
             ship.l = l;
@@ -36,7 +36,7 @@ class Shooter {
             return ship;
         }
 
-        public Point getP() {
+        public Field getP() {
             return p;
         }
 
@@ -48,7 +48,7 @@ class Shooter {
             return orientation;
         }
 
-        public void setP(Point p) {
+        public void setP(Field p) {
             this.p = p;
         }
 
@@ -74,21 +74,16 @@ class Shooter {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(Point.of(input.get(i).getP().getX(), input.get(i).getP().getY() + j), false));
+                    list.add(PointH.of(Field.of(input.get(i).getP().getX(), input.get(i).getP().getY() + j), false));
                 } else {
-                    list.add(PointH.of(Point.of(input.get(i).getP().getX() + j, input.get(i).getP().getY()), false));
+                    list.add(PointH.of(Field.of(input.get(i).getP().getX() + j, input.get(i).getP().getY()), false));
                 }
             }
             data.add(list);
         }
     }
 
-    /**
-     * Take shot for given field and return shot result
-     *
-     * @param s - field coordinates
-     */
-    public Result shoot(Point s) {
+    public Result shoot(Field s) {
         var result = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == result; ++i) {

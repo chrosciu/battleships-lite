@@ -7,15 +7,15 @@ import java.util.Scanner;
 import static eu.chrost.Orientation.HORIZONTAL;
 import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
-import static eu.chrost.Point.of;
+import static eu.chrost.Field.of;
 
 class Game {
     public static void main(String[] args) {
         //create empty ship list...
         List<Shooter.Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Shooter.Ship.of(Point.of(1, 1), 4, VERTICAL));
-        rv.add(Shooter.Ship.of(Point.of(6, 7), 2, HORIZONTAL));
+        rv.add(Shooter.Ship.of(Field.of(1, 1), 4, VERTICAL));
+        rv.add(Shooter.Ship.of(Field.of(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
