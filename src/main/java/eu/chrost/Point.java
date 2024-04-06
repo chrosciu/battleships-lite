@@ -1,14 +1,11 @@
 package eu.chrost;
 
 class Point {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public static Point of(int x, int y) {
-        Point point = new Point();
-        point.x = x;
-        point.y = y;
-        return point;
+        return new Point(x, y);
     }
 
     public int getX() {
@@ -17,5 +14,10 @@ class Point {
 
     public int getY() {
         return y;
+    }
+
+    private Point(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
