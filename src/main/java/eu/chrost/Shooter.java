@@ -11,19 +11,7 @@ import static eu.chrost.Result.SUNK;
 
 class Shooter {
 
-    public static class PointH {
-        public Field p;
-        public boolean h;
-
-        public static PointH of(Field p, boolean h) {
-            PointH pointH = new PointH();
-            pointH.p = p;
-            pointH.h = h;
-            return pointH;
-        }
-    }
-
-    private List<List<PointH>> data = new ArrayList<>();
+    private List<List<ShipField>> data = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -33,12 +21,12 @@ class Shooter {
      */
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<PointH> list = new ArrayList<>();
+            List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j), false));
+                    list.add(ShipField.of(Field.of(input.get(i).getFirstField().getX(), input.get(i).getFirstField().getY() + j)));
                 } else {
-                    list.add(PointH.of(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY()), false));
+                    list.add(ShipField.of(Field.of(input.get(i).getFirstField().getX() + j, input.get(i).getFirstField().getY())));
                 }
             }
             data.add(list);
@@ -52,8 +40,8 @@ class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).p.getX() == s.getX() && data.get(i).get(j).p.getY() == s.getY()) {
-                    data.get(i).get(j).h = true;
+                if (data.get(i).get(j).getField().getX() == s.getX() && data.get(i).get(j).getField().getY() == s.getY()) {
+                    data.get(i).get(j).markAsHit();
                     result = HIT;
                 }
             }
@@ -62,7 +50,7 @@ class Shooter {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).h;
+                    a &= data.get(i).get(j).isHit();
                 }
                 if (a) {
                     result = SUNK;
@@ -73,7 +61,7 @@ class Shooter {
         boolean a = true;
         for (int i = 0; i < data.size() && a; ++i) {
             for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).h;
+                a &= data.get(i).get(j).isHit();
             }
         }
         if (a) {
