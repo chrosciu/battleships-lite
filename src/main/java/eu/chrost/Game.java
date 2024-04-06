@@ -7,7 +7,7 @@ import java.util.Scanner;
 import static eu.chrost.Orientation.HORIZONTAL;
 import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
-import static eu.chrost.Shooter.Point.point;
+import static eu.chrost.Point.point;
 
 class Game {
     public static void main(String[] args) {
