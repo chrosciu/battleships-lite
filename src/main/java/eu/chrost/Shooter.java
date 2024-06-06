@@ -73,11 +73,8 @@ public class Shooter {
         for (int i = 0; i < input.size(); ++i) {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
-                if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(Field.of(input.get(i).getP().getX(), input.get(i).getP().getY() + j), false));
-                } else {
-                    list.add(PointH.of(Field.of(input.get(i).getP().getX() + j, input.get(i).getP().getY()), false));
-                }
+                Field shiftedField = input.get(i).getP().shift(j, input.get(i).getOrientation());
+                list.add(PointH.of(shiftedField, false));
             }
             data.add(list);
         }

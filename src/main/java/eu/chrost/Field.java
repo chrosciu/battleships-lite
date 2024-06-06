@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Objects;
+import static eu.chrost.Orientation.VERTICAL;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
@@ -16,5 +16,13 @@ public class Field {
 
     public static Field of(int x, int y) {
         return new Field(x, y);
+    }
+
+    public Field shift(int shift, Orientation orientation) {
+        if (orientation == VERTICAL) {
+            return of(x, y + shift);
+        } else {
+            return of(x + shift, y);
+        }
     }
 }
