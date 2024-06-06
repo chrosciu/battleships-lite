@@ -1,16 +1,16 @@
 package eu.chrost;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Point {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
-    public static Point point(int x, int y) {
-        Point point = new Point();
-        point.x = x;
-        point.y = y;
-        return point;
+    public static Point of(int x, int y) {
+        return new Point(x, y);
     }
 }
