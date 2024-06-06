@@ -25,7 +25,7 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            Result result = shooter.shoot(point(a, b));
+            var result = shooter.shoot(point(a, b));
             System.out.println(result);
             if (FINISHED == result) {
                 break;
