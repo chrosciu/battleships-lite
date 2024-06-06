@@ -86,17 +86,17 @@ public class Shooter {
     /**
      * Take shot for given field and return shot result
      *
-     * @param s - field coordinates
+     * @param field - field coordinates
      * @return - shot result
      */
-    public Result shoot(Field s) {
+    public Result shoot(Field field) {
         var result = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == result; ++i) {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).p.getX() == s.getX() && data.get(i).get(j).p.getY() == s.getY()) {
+                if (data.get(i).get(j).p.equals(field)) {
                     data.get(i).get(j).h = true;
                     result = HIT;
                 }
