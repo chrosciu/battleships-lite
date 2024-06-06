@@ -43,11 +43,11 @@ class ShooterTest {
     private static final Ship HORIZONTAL_TWO_FIELDS_SHIP =
             Ship.of(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, HORIZONTAL);
 
-    private static final List<Ship> NO_SHIPS =
+    private static final List<Ship> BOARD_WITH_NO_SHIPS =
             List.of();
-    private static final List<Ship> SINGLE_TWO_FIELDS_SHIP =
+    private static final List<Ship> BOARD_WITH_SINGLE_TWO_FIELDS_SHIP =
             List.of(VERTICAL_TWO_FIELDS_SHIP);
-    private static final List<Ship> MULTIPLE_SHIPS =
+    private static final List<Ship> BOARD_WITH_MULTIPLE_SHIPS =
             List.of(VERTICAL_TWO_FIELDS_SHIP, ONE_FIELD_SHIP, ANOTHER_ONE_FIELD_SHIP, HORIZONTAL_TWO_FIELDS_SHIP);
 
     private static final int MISSED = 0;
@@ -58,7 +58,7 @@ class ShooterTest {
     @Test
     void A_board_without_ships_returns_finished_state_on_first_shot() {
         //given
-        Shooter shooter = new Shooter(NO_SHIPS);
+        Shooter shooter = new Shooter(BOARD_WITH_NO_SHIPS);
 
         //when
         int result = shooter.shoot(FIELD_WITHOUT_SHIP);
@@ -70,7 +70,7 @@ class ShooterTest {
     @Nested
     class A_board_with_single_two_fields_ship {
         //given
-        Shooter shooter = new Shooter(SINGLE_TWO_FIELDS_SHIP);
+        Shooter shooter = new Shooter(BOARD_WITH_SINGLE_TWO_FIELDS_SHIP);
 
         @Test
         void returns_missed_status_on_first_shot_on_field_without_ship() {
@@ -100,7 +100,7 @@ class ShooterTest {
     @Test
     void A_board_with_multiple_ships_returns_proper_statuses_on_all_shots() {
         //given
-        Shooter shooter = new Shooter(MULTIPLE_SHIPS);
+        Shooter shooter = new Shooter(BOARD_WITH_MULTIPLE_SHIPS);
 
         //when
         int result = shooter.shoot(FIELD_WITHOUT_SHIP);
