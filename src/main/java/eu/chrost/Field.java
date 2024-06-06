@@ -6,11 +6,11 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class Point {
+public class Field {
     private final int x;
     private final int y;
 
-    public static Point of(int x, int y) {
-        return new Point(x, y);
+    public static Field of(int x, int y) {
+        return new Field(x, y);
     }
 }
