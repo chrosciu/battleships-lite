@@ -1,18 +1,21 @@
 package eu.chrost;
 
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShipField {
-    private Field field;
-    @Setter
-    private boolean hit;
+    private final Field field;
 
-    public static ShipField of(Field p, boolean h) {
-        ShipField pointH = new ShipField();
-        pointH.field = p;
-        pointH.hit = h;
-        return pointH;
+    private boolean hit = false;
+
+    public static ShipField of(Field field) {
+        return new ShipField(field);
+    }
+
+    public void markAsHit() {
+        this.hit = true;
     }
 }
