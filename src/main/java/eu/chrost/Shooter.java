@@ -3,25 +3,12 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
-import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
 import static eu.chrost.Result.SUNK;
 
 public class Shooter {
-
-    public static class PointH {
-        public Field field;
-        public boolean h;
-
-        public static PointH of(Field field, boolean h) {
-            PointH pointH = new PointH();
-            pointH.field = field;
-            pointH.h = h;
-            return pointH;
-        }
-    }
 
     public static class Ship {
         private Field field;
@@ -61,7 +48,7 @@ public class Shooter {
         }
     }
 
-    private List<List<PointH>> data = new ArrayList<>();
+    private List<List<ShipField>> data = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -71,12 +58,13 @@ public class Shooter {
      */
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<PointH> list = new ArrayList<>();
+            List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {
-                var shipFirstField = input.get(i).getField();
+                var firstField = input.get(i).getField();
                 var orientation = input.get(i).getOrientation();
-                var shipField = shipFirstField.shift(j, orientation);
-                list.add(PointH.of(shipField, false));
+                var shiftedField = firstField.shift(j, orientation);
+                var shipField = ShipField.of(shiftedField);
+                list.add(shipField);
             }
             data.add(list);
         }
@@ -95,8 +83,8 @@ public class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).field.equals(field)) {
-                    data.get(i).get(j).h = true;
+                if (data.get(i).get(j).getField().equals(field)) {
+                    data.get(i).get(j).markAsHit();
                     result = HIT;
                 }
             }
@@ -105,7 +93,7 @@ public class Shooter {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).h;
+                    a &= data.get(i).get(j).isHit();
                 }
                 if (a) {
                     result = SUNK;
@@ -116,7 +104,7 @@ public class Shooter {
         boolean a = true;
         for (int i = 0; i < data.size() && a; ++i) {
             for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).h;
+                a &= data.get(i).get(j).isHit();
             }
         }
         if (a) {
