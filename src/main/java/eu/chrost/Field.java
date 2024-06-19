@@ -1,12 +1,16 @@
 package eu.chrost;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Objects;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @Getter
 @RequiredArgsConstructor(access = PRIVATE)
+@EqualsAndHashCode
 public class Field {
     private final int x;
     private final int y;
