@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static eu.chrost.Result.FINISHED;
+import static eu.chrost.Result.HIT;
+import static eu.chrost.Result.MISSED;
+import static eu.chrost.Result.SUNK;
 import static eu.chrost.Shooter.point;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,18 +54,13 @@ class ShooterTest {
     private static final List<Ship> BOARD_WITH_MULTIPLE_SHIPS =
             List.of(VERTICAL_TWO_FIELDS_SHIP, ONE_FIELD_SHIP, ANOTHER_ONE_FIELD_SHIP, HORIZONTAL_TWO_FIELDS_SHIP);
 
-    private static final int MISSED = 0;
-    private static final int HIT = 1;
-    private static final int SUNK = 2;
-    private static final int FINISHED = 3;
-
     @Test
     void A_board_without_ships_returns_finished_state_on_first_shot() {
         //given
         Shooter shooter = new Shooter(BOARD_WITH_NO_SHIPS);
 
         //when
-        int result = shooter.shoot(FIELD_WITHOUT_SHIP);
+        Result result = shooter.shoot(FIELD_WITHOUT_SHIP);
 
         //then
         assertThat(result).isEqualTo(FINISHED);
@@ -75,7 +74,7 @@ class ShooterTest {
         @Test
         void returns_missed_status_on_first_shot_on_field_without_ship() {
             //when
-            int result = shooter.shoot(FIELD_WITHOUT_SHIP);
+            Result result = shooter.shoot(FIELD_WITHOUT_SHIP);
 
             //then
             assertEquals(MISSED, result);
@@ -84,7 +83,7 @@ class ShooterTest {
         @Test
         void returns_hit_and_then_sunk_results_on_shot_on_all_ship_fields() {
             //when
-            int result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+            Result result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
 
             //then
             assertEquals(HIT, result);
@@ -103,7 +102,7 @@ class ShooterTest {
         Shooter shooter = new Shooter(BOARD_WITH_MULTIPLE_SHIPS);
 
         //when
-        int result = shooter.shoot(FIELD_WITHOUT_SHIP);
+        Result result = shooter.shoot(FIELD_WITHOUT_SHIP);
 
         //then
         assertEquals(MISSED, result);
