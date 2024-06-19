@@ -13,8 +13,8 @@ public class Game {
         //create empty ship list...
         List<Shooter.Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Shooter.Ship.of(Point.of(1, 1), 4, VERTICAL));
-        rv.add(Shooter.Ship.of(Point.of(6, 7), 2, HORIZONTAL));
+        rv.add(Shooter.Ship.of(Field.of(1, 1), 4, VERTICAL));
+        rv.add(Shooter.Ship.of(Field.of(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            var result = shooter.shoot(Point.of(a, b));
+            var result = shooter.shoot(Field.of(a, b));
             System.out.println(result);
             if (FINISHED == result) {
                 break;
