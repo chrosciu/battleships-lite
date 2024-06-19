@@ -73,11 +73,10 @@ public class Shooter {
         for (int i = 0; i < input.size(); ++i) {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getLength(); ++j) {
-                if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(Field.of(input.get(i).getField().getX(), input.get(i).getField().getY() + j), false));
-                } else {
-                    list.add(PointH.of(Field.of(input.get(i).getField().getX() + j, input.get(i).getField().getY()), false));
-                }
+                var shipFirstField = input.get(i).getField();
+                var orientation = input.get(i).getOrientation();
+                var shipField = shipFirstField.shift(j, orientation);
+                list.add(PointH.of(shipField, false));
             }
             data.add(list);
         }
