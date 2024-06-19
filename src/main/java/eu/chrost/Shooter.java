@@ -12,48 +12,48 @@ import static eu.chrost.Result.SUNK;
 public class Shooter {
 
     public static class PointH {
-        public Field p;
+        public Field field;
         public boolean h;
 
-        public static PointH of(Field p, boolean h) {
+        public static PointH of(Field field, boolean h) {
             PointH pointH = new PointH();
-            pointH.p = p;
+            pointH.field = field;
             pointH.h = h;
             return pointH;
         }
     }
 
     public static class Ship {
-        private Field p;
-        private int l;
+        private Field field;
+        private int length;
         private Orientation orientation;
 
-        public static Ship of(Field p, int l, Orientation orientation) {
+        public static Ship of(Field field, int length, Orientation orientation) {
             Ship ship = new Ship();
-            ship.p = p;
-            ship.l = l;
+            ship.field = field;
+            ship.length = length;
             ship.orientation = orientation;
             return ship;
         }
 
-        public Field getP() {
-            return p;
+        public Field getField() {
+            return field;
         }
 
-        public int getL() {
-            return l;
+        public int getLength() {
+            return length;
         }
 
         public Orientation getOrientation() {
             return orientation;
         }
 
-        public void setP(Field p) {
-            this.p = p;
+        public void setField(Field field) {
+            this.field = field;
         }
 
-        public void setL(int l) {
-            this.l = l;
+        public void setLength(int length) {
+            this.length = length;
         }
 
         public void setOrientation(Orientation orientation) {
@@ -72,11 +72,11 @@ public class Shooter {
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<PointH> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getL(); ++j) {
+            for (int j = 0; j < input.get(i).getLength(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(Field.of(input.get(i).getP().getX(), input.get(i).getP().getY() + j), false));
+                    list.add(PointH.of(Field.of(input.get(i).getField().getX(), input.get(i).getField().getY() + j), false));
                 } else {
-                    list.add(PointH.of(Field.of(input.get(i).getP().getX() + j, input.get(i).getP().getY()), false));
+                    list.add(PointH.of(Field.of(input.get(i).getField().getX() + j, input.get(i).getField().getY()), false));
                 }
             }
             data.add(list);
@@ -86,17 +86,17 @@ public class Shooter {
     /**
      * Take shot for given field and return shot result
      *
-     * @param s - field coordinates
+     * @param field - field coordinates
      * @return - shot result
      */
-    public Result shoot(Field s) {
+    public Result shoot(Field field) {
         var result = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == result; ++i) {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).p.getX() == s.getX() && data.get(i).get(j).p.getY() == s.getY()) {
+                if (data.get(i).get(j).field.getX() == field.getX() && data.get(i).get(j).field.getY() == field.getY()) {
                     data.get(i).get(j).h = true;
                     result = HIT;
                 }
