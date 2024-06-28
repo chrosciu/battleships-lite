@@ -1,13 +1,6 @@
 package eu.chrost;
 
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
-@EqualsAndHashCode
-public class Field {
-    private final int x;
-    private final int y;
+public record Field(int x, int y) {
 
     @Deprecated
     public static Field field(int x, int y) {
