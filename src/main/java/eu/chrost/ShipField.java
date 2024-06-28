@@ -1,9 +1,17 @@
 package eu.chrost;
 
-import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@AllArgsConstructor
+@Getter
 public class ShipField {
-    public Field field;
-    public boolean hit;
+    private final Field field;
+    private boolean hit = false;
+
+    public ShipField(Field field) {
+        this.field = field;
+    }
+
+    public void markAsHit() {
+        this.hit = true;
+    }
 }

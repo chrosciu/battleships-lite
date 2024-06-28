@@ -51,7 +51,7 @@ public class Shooter {
                 var orientation = input.get(i).getOrientation();
                 var originalField = input.get(i).getP();
                 var shiftedField = originalField.shiftInOrientation(shift, orientation);
-                list.add(new ShipField(shiftedField, false));
+                list.add(new ShipField(shiftedField));
             }
             data.add(list);
         }
@@ -70,8 +70,8 @@ public class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).field.equals(field)) {
-                    data.get(i).get(j).hit = true;
+                if (data.get(i).get(j).getField().equals(field)) {
+                    data.get(i).get(j).markAsHit();
                     result = HIT;
                 }
             }
@@ -80,7 +80,7 @@ public class Shooter {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
                 for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).hit;
+                    a &= data.get(i).get(j).isHit();
                 }
                 if (a) {
                     result = SUNK;
@@ -91,7 +91,7 @@ public class Shooter {
         boolean a = true;
         for (int i = 0; i < data.size() && a; ++i) {
             for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).hit;
+                a &= data.get(i).get(j).isHit();
             }
         }
         if (a) {
