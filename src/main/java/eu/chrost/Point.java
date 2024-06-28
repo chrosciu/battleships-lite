@@ -15,13 +15,9 @@ public class Point {
     }
 
     public Point shiftInOrientation(int shift, Orientation orientation) {
-        switch (orientation) {
-            case VERTICAL:
-                return new Point(x, y + shift);
-            case HORIZONTAL:
-                return new Point(x + shift, y);
-            default:
-                throw new IllegalArgumentException("Invalid orientation: " + orientation);
-        }
+        return switch (orientation) {
+            case VERTICAL -> new Point(x, y + shift);
+            case HORIZONTAL -> new Point(x + shift, y);
+        };
     }
 }
