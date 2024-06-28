@@ -59,17 +59,6 @@ public class Shooter {
             return b;
         }
 
-        public void setP(Point p) {
-            this.p = p;
-        }
-
-        public void setL(int l) {
-            this.l = l;
-        }
-
-        public void setB(boolean b) {
-            this.b = b;
-        }
     }
 
     private List<List<PointH>> data = new ArrayList<>();
