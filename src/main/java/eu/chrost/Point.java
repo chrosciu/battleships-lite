@@ -1,10 +1,8 @@
 package eu.chrost;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@Getter
 @RequiredArgsConstructor
 @EqualsAndHashCode
 public class Point {
@@ -14,5 +12,16 @@ public class Point {
     @Deprecated
     public static Point point(int x, int y) {
         return new Point(x, y);
+    }
+
+    public Point shiftInOrientation(int shift, Orientation orientation) {
+        switch (orientation) {
+            case VERTICAL:
+                return new Point(x, y + shift);
+            case HORIZONTAL:
+                return new Point(x + shift, y);
+            default:
+                throw new IllegalArgumentException("Invalid orientation: " + orientation);
+        }
     }
 }
