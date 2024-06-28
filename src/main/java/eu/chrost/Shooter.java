@@ -11,10 +11,10 @@ import static eu.chrost.Result.SUNK;
 public class Shooter {
 
     public static class PointH {
-        public Point p;
+        public Field p;
         public boolean h;
 
-        public static PointH of(Point p, boolean h) {
+        public static PointH of(Field p, boolean h) {
             PointH pointH = new PointH();
             pointH.p = p;
             pointH.h = h;
@@ -23,11 +23,11 @@ public class Shooter {
     }
 
     public static class Ship {
-        private Point p;
+        private Field p;
         private int l;
         private Orientation orientation;
 
-        public static Ship of(Point p, int l, Orientation orientation) {
+        public static Ship of(Field p, int l, Orientation orientation) {
             Ship ship = new Ship();
             ship.p = p;
             ship.l = l;
@@ -35,7 +35,7 @@ public class Shooter {
             return ship;
         }
 
-        public Point getP() {
+        public Field getP() {
             return p;
         }
 
@@ -61,9 +61,9 @@ public class Shooter {
             List<PointH> list = new ArrayList<>();
             for (int shift = 0; shift < input.get(i).getL(); ++shift) {
                 var orientation = input.get(i).getOrientation();
-                var originalPoint = input.get(i).getP();
-                var shiftedPoint = originalPoint.shiftInOrientation(shift, orientation);
-                list.add(PointH.of(shiftedPoint, false));
+                var originalField = input.get(i).getP();
+                var shiftedField = originalField.shiftInOrientation(shift, orientation);
+                list.add(PointH.of(shiftedField, false));
             }
             data.add(list);
         }
@@ -72,17 +72,17 @@ public class Shooter {
     /**
      * Take shot for given field and return shot result
      *
-     * @param point - field coordinates
+     * @param field - field coordinates
      * @return - shot result: 0 - no hit, 1 - ship hit, 2 - ship sunk, 3 - all ships sunk
      */
-    public Result takeShot(Point point) {
+    public Result takeShot(Field field) {
         var result = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == result; ++i) {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).p.equals(point)) {
+                if (data.get(i).get(j).p.equals(field)) {
                     data.get(i).get(j).h = true;
                     result = HIT;
                 }

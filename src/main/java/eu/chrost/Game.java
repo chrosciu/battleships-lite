@@ -7,15 +7,15 @@ import java.util.Scanner;
 import static eu.chrost.Orientation.HORIZONTAL;
 import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
-import static eu.chrost.Point.point;
+import static eu.chrost.Field.field;
 
 public class Game {
     public static void main(String[] args) {
         //create empty ship list...
         List<Shooter.Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Shooter.Ship.of(point(1, 1), 4, VERTICAL));
-        rv.add(Shooter.Ship.of(point(6, 7), 2, HORIZONTAL));
+        rv.add(Shooter.Ship.of(field(1, 1), 4, VERTICAL));
+        rv.add(Shooter.Ship.of(field(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            var result = shooter.takeShot(point(a, b));
+            var result = shooter.takeShot(field(a, b));
             System.out.println(result);
             //if all ships sunk finish the game
             if (FINISHED == result) {
