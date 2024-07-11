@@ -25,10 +25,10 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            Result r = shooter.shoot(point(a, b));
-            System.out.println(r);
+            var result = shooter.shoot(point(a, b));
+            System.out.println(result);
             //if all ships sunk finish the game
-            if (FINISHED == r) {
+            if (FINISHED == result) {
                 break;
             }
         }
