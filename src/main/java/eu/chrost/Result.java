@@ -12,13 +12,9 @@ public enum Result {
         this.rank = rank;
     }
 
-    public int getRank() {
-        return rank;
-    }
-
     public static Result fromRank(int rank) {
         for (Result result: values()) {
-            if (result.getRank() == rank) {
+            if (result.rank == rank) {
                 return result;
             }
         }
