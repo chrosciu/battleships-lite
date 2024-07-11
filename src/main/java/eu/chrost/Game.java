@@ -13,8 +13,8 @@ public class Game {
         //create empty ship list...
         List<Shooter.Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Shooter.Ship.of(new Point(1, 1), 4, VERTICAL));
-        rv.add(Shooter.Ship.of(new Point(6, 7), 2, HORIZONTAL));
+        rv.add(Shooter.Ship.of(new Field(1, 1), 4, VERTICAL));
+        rv.add(Shooter.Ship.of(new Field(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class Game {
             System.out.println("enter b");
             int b = keyboard.nextInt();
             //... and take shot !
-            var result = shooter.shoot(new Point(a, b));
+            var result = shooter.shoot(new Field(a, b));
             System.out.println(result);
             //if all ships sunk finish the game
             if (FINISHED == result) {

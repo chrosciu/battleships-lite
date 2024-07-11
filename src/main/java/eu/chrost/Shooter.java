@@ -12,10 +12,10 @@ import static eu.chrost.Result.SUNK;
 public class Shooter {
 
     public static class PointH {
-        public Point p;
+        public Field p;
         public boolean h;
 
-        public static PointH of(Point p, boolean h) {
+        public static PointH of(Field p, boolean h) {
             PointH pointH = new PointH();
             pointH.p = p;
             pointH.h = h;
@@ -24,11 +24,11 @@ public class Shooter {
     }
 
     public static class Ship {
-        private Point p;
+        private Field p;
         private int l;
         private Orientation orientation;
 
-        public static Ship of(Point p, int l, Orientation orientation) {
+        public static Ship of(Field p, int l, Orientation orientation) {
             Ship ship = new Ship();
             ship.p = p;
             ship.l = l;
@@ -36,7 +36,7 @@ public class Shooter {
             return ship;
         }
 
-        public Point getP() {
+        public Field getP() {
             return p;
         }
 
@@ -63,9 +63,9 @@ public class Shooter {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(new Point(input.get(i).getP().x(), input.get(i).getP().y() + j), false));
+                    list.add(PointH.of(new Field(input.get(i).getP().x(), input.get(i).getP().y() + j), false));
                 } else {
-                    list.add(PointH.of(new Point(input.get(i).getP().x() + j, input.get(i).getP().y()), false));
+                    list.add(PointH.of(new Field(input.get(i).getP().x() + j, input.get(i).getP().y()), false));
                 }
             }
             data.add(list);
@@ -75,17 +75,17 @@ public class Shooter {
     /**
      * Take shot for given field and return shot result
      *
-     * @param s - field coordinates
+     * @param field - field coordinates
      * @return - shot result
      */
-    public Result shoot(Point s) {
+    public Result shoot(Field field) {
         var result = MISSED;
         //iterate through all ships
         for (int i = 0; i < data.size() && MISSED == result; ++i) {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).p.x()== s.x() && data.get(i).get(j).p.y() == s.y()) {
+                if (data.get(i).get(j).p.x()== field.x() && data.get(i).get(j).p.y() == field.y()) {
                     data.get(i).get(j).h = true;
                     result = HIT;
                 }
