@@ -10,7 +10,7 @@ import static eu.chrost.Result.SUNK;
 
 public class Shooter {
 
-    private List<List<ShipField>> data = new ArrayList<>();
+    private List<List<ShipField>> ships = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ship definitions
@@ -24,7 +24,7 @@ public class Shooter {
                 var shiftedField = firstField.shift(j, orientation);
                 list.add(new ShipField(shiftedField));
             }
-            data.add(list);
+            ships.add(list);
         }
     }
 
@@ -37,12 +37,12 @@ public class Shooter {
     public Result shoot(Field field) {
         var result = MISSED;
         //iterate through all ships
-        for (int i = 0; i < data.size() && MISSED == result; ++i) {
+        for (int i = 0; i < ships.size() && MISSED == result; ++i) {
             //iterate through all ship fields
-            for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
+            for (int j = 0; j < ships.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).getField().equals(field)) {
-                    data.get(i).get(j).markAsHit();
+                if (ships.get(i).get(j).getField().equals(field)) {
+                    ships.get(i).get(j).markAsHit();
                     result = HIT;
                 }
             }
@@ -50,8 +50,8 @@ public class Shooter {
             if (HIT == result) {
                 //iterate through all fields and check if they are all hit
                 boolean a = true;
-                for (int j = 0; j < data.get(i).size() && a; ++j) {
-                    a &= data.get(i).get(j).isHit();
+                for (int j = 0; j < ships.get(i).size() && a; ++j) {
+                    a &= ships.get(i).get(j).isHit();
                 }
                 if (a) {
                     result = SUNK;
@@ -60,9 +60,9 @@ public class Shooter {
         }
         //check if all ships are sunk
         boolean a = true;
-        for (int i = 0; i < data.size() && a; ++i) {
-            for (int j = 0; j < data.get(i).size() && a; ++j) {
-                a &= data.get(i).get(j).isHit();
+        for (int i = 0; i < ships.size() && a; ++i) {
+            for (int j = 0; j < ships.get(i).size() && a; ++j) {
+                a &= ships.get(i).get(j).isHit();
             }
         }
         if (a) {
