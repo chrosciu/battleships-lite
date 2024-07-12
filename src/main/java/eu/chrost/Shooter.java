@@ -10,21 +10,21 @@ import static eu.chrost.Result.SUNK;
 
 public class Shooter {
 
-    private List<List<ShipField>> ships = new ArrayList<>();
+    private List<Ship> ships = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ship definitions
      */
     public Shooter(List<ShipDefinition> shipDefinitions) {
         for (var shipDefinition : shipDefinitions) {
-            List<ShipField> list = new ArrayList<>();
+            Ship ship = new Ship();
             for (int j = 0; j < shipDefinition.length(); ++j) {
                 var firstField = shipDefinition.firstField();
                 var orientation = shipDefinition.orientation();
                 var shiftedField = firstField.shift(j, orientation);
-                list.add(new ShipField(shiftedField));
+                ship.add(new ShipField(shiftedField));
             }
-            ships.add(list);
+            ships.add(ship);
         }
     }
 
