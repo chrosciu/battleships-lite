@@ -1,15 +1,6 @@
 package eu.chrost;
 
-public class Ship {
-    private Field firstField;
-    private int length;
-    private Orientation orientation;
-
-    public Ship(Field firstField, int length, Orientation orientation) {
-        this.firstField = firstField;
-        this.length = length;
-        this.orientation = orientation;
-    }
+public record Ship(Field firstField, int length, Orientation orientation) {
 
     public Field getFirstField() {
         return firstField;
