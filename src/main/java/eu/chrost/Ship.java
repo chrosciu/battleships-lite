@@ -17,4 +17,12 @@ public class Ship {
     public ShipField get(int index) {
         return shipFields.get(index);
     }
+
+    public boolean isSunk() {
+        boolean isSunk = true;
+        for (int j = 0; j < size() && isSunk; ++j) {
+            isSunk &= get(j).isHit();
+        }
+        return isSunk;
+    }
 }
