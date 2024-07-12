@@ -30,12 +30,9 @@ public class Shooter {
      */
     public Result shoot(Field field) {
         var result = MISSED;
-        //iterate through all ships
-        for (int i = 0; i < ships.size(); ++i) {
-            var ship = ships.get(i);
+        for (var ship : ships) {
             //iterate through all ship fields
             for (int j = 0; j < ship.size(); ++j) {
-                //if any of ship fields is equal to passed field - mark as hit
                 if (ship.get(j).getField().equals(field)) {
                     ship.get(j).markAsHit();
                     result = HIT;
