@@ -16,9 +16,8 @@ public class Shooter {
      * Initialize shooter with given list of ship definitions
      */
     public Shooter(List<ShipDefinition> shipDefinitions) {
-        for (int i = 0; i < shipDefinitions.size(); ++i) {
+        for (var shipDefinition : shipDefinitions) {
             List<ShipField> list = new ArrayList<>();
-            var shipDefinition = shipDefinitions.get(i);
             for (int j = 0; j < shipDefinition.length(); ++j) {
                 var firstField = shipDefinition.firstField();
                 var orientation = shipDefinition.orientation();
