@@ -3,7 +3,6 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
-import static eu.chrost.Orientation.VERTICAL;
 import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
@@ -50,11 +49,10 @@ public class Shooter {
         for (int i = 0; i < input.size(); ++i) {
             List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
-                if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(new ShipField(new Field(input.get(i).getP().x(), input.get(i).getP().y() + j)));
-                } else {
-                    list.add(new ShipField(new Field(input.get(i).getP().x() + j, input.get(i).getP().y())));
-                }
+                var firstField = input.get(i).getP();
+                var orientation = input.get(i).getOrientation();
+                var shiftedField = firstField.shift(j, orientation);
+                list.add(new ShipField(shiftedField));
             }
             data.add(list);
         }
