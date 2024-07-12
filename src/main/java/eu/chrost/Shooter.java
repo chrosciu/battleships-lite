@@ -40,11 +40,8 @@ public class Shooter {
                     result = HIT;
                 }
             }
-            //if ship is hit - check if it is sunk
             if (HIT == result) {
-                //iterate through all fields and check if they are all hit
-                boolean isSunk = ships.get(i).isSunk();
-                if (isSunk) {
+                if (ships.get(i).isSunk()) {
                     result = SUNK;
                 }
             }
