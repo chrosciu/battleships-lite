@@ -51,9 +51,9 @@ public class Shooter {
             List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(ShipField.of(new Field(input.get(i).getP().x(), input.get(i).getP().y() + j), false));
+                    list.add(new ShipField(new Field(input.get(i).getP().x(), input.get(i).getP().y() + j), false));
                 } else {
-                    list.add(ShipField.of(new Field(input.get(i).getP().x() + j, input.get(i).getP().y()), false));
+                    list.add(new ShipField(new Field(input.get(i).getP().x() + j, input.get(i).getP().y()), false));
                 }
             }
             data.add(list);
