@@ -21,8 +21,8 @@ public class Shooter {
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
             List<ShipField> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).getL(); ++j) {
-                var firstField = input.get(i).getP();
+            for (int j = 0; j < input.get(i).getLength(); ++j) {
+                var firstField = input.get(i).getFirstField();
                 var orientation = input.get(i).getOrientation();
                 var shiftedField = firstField.shift(j, orientation);
                 list.add(new ShipField(shiftedField));

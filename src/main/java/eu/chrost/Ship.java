@@ -1,22 +1,22 @@
 package eu.chrost;
 
 public class Ship {
-    private Field p;
-    private int l;
+    private Field firstField;
+    private int length;
     private Orientation orientation;
 
-    public Ship(Field p, int l, Orientation orientation) {
-        this.p = p;
-        this.l = l;
+    public Ship(Field firstField, int length, Orientation orientation) {
+        this.firstField = firstField;
+        this.length = length;
         this.orientation = orientation;
     }
 
-    public Field getP() {
-        return p;
+    public Field getFirstField() {
+        return firstField;
     }
 
-    public int getL() {
-        return l;
+    public int getLength() {
+        return length;
     }
 
     public Orientation getOrientation() {
