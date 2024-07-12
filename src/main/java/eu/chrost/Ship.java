@@ -3,7 +3,7 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
-class Ship {
+public class Ship {
     private final List<ShipField> shipFields = new ArrayList<>();
 
     public void add(ShipField shipField) {
