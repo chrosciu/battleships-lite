@@ -43,8 +43,6 @@ public class Shooter {
                 if (ship.isSunk()) {
                     result = SUNK;
                 }
-            }
-            if (result != MISSED) {
                 break;
             }
         }
