@@ -32,16 +32,17 @@ public class Shooter {
         var result = MISSED;
         //iterate through all ships
         for (int i = 0; i < ships.size() && MISSED == result; ++i) {
+            var ship = ships.get(i);
             //iterate through all ship fields
-            for (int j = 0; j < ships.get(i).size() && MISSED == result; ++j) {
+            for (int j = 0; j < ship.size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (ships.get(i).get(j).getField().equals(field)) {
-                    ships.get(i).get(j).markAsHit();
+                if (ship.get(j).getField().equals(field)) {
+                    ship.get(j).markAsHit();
                     result = HIT;
                 }
             }
             if (HIT == result) {
-                if (ships.get(i).isSunk()) {
+                if (ship.isSunk()) {
                     result = SUNK;
                 }
             }
