@@ -51,9 +51,9 @@ public class Shooter {
             List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(new ShipField(new Field(input.get(i).getP().x(), input.get(i).getP().y() + j), false));
+                    list.add(new ShipField(new Field(input.get(i).getP().x(), input.get(i).getP().y() + j)));
                 } else {
-                    list.add(new ShipField(new Field(input.get(i).getP().x() + j, input.get(i).getP().y()), false));
+                    list.add(new ShipField(new Field(input.get(i).getP().x() + j, input.get(i).getP().y())));
                 }
             }
             data.add(list);
@@ -74,7 +74,7 @@ public class Shooter {
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
                 if (data.get(i).get(j).getField().equals(field)) {
-                    data.get(i).get(j).setHit(true);
+                    data.get(i).get(j).markAsHit();
                     result = HIT;
                 }
             }
