@@ -34,20 +34,9 @@ public class Shooter {
                 break;
             }
         }
-        if (areAllShipsSunk()) {
+        if (ShipUtil.areGivenShipsSunk(ships)) {
             result = FINISHED;
         }
         return result;
     }
-
-    private boolean areAllShipsSunk() {
-        boolean isFinished = true;
-        for (int i = 0; i < ships.size() && isFinished; ++i) {
-            for (int j = 0; j < ships.get(i).size() && isFinished; ++j) {
-                isFinished &= ships.get(i).get(j).isHit();
-            }
-        }
-        return isFinished;
-    }
-
 }
