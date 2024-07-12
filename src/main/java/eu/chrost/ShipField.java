@@ -1,13 +1,13 @@
 package eu.chrost;
 
 public class ShipField {
-    public Field p;
-    public boolean h;
+    public Field field;
+    public boolean hit;
 
-    public static ShipField of(Field p, boolean h) {
+    public static ShipField of(Field field, boolean hit) {
         ShipField shipField = new ShipField();
-        shipField.p = p;
-        shipField.h = h;
+        shipField.field = field;
+        shipField.hit = hit;
         return shipField;
     }
 }
