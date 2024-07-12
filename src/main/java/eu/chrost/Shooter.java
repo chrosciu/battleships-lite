@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static eu.chrost.Result.FINISHED;
-import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
-import static eu.chrost.Result.SUNK;
 
 public class Shooter {
 
@@ -31,30 +29,13 @@ public class Shooter {
     public Result shoot(Field field) {
         var result = MISSED;
         for (var ship : ships) {
-            result = takeShotOnGivenShip(field, ship);
+            result = ship.takeShot(field);
             if (result != MISSED) {
                 break;
             }
         }
         if (areAllShipsSunk()) {
             result = FINISHED;
-        }
-        return result;
-    }
-
-    private Result takeShotOnGivenShip(Field field, Ship ship) {
-        var result = MISSED;
-        for (int j = 0; j < ship.size(); ++j) {
-            if (ship.get(j).getField().equals(field)) {
-                ship.get(j).markAsHit();
-                result = HIT;
-                break;
-            }
-        }
-        if (HIT == result) {
-            if (ship.isSunk()) {
-                result = SUNK;
-            }
         }
         return result;
     }
