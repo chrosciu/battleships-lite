@@ -43,23 +43,23 @@ public class Shooter {
             //if ship is hit - check if it is sunk
             if (HIT == result) {
                 //iterate through all fields and check if they are all hit
-                boolean a = true;
-                for (int j = 0; j < ships.get(i).size() && a; ++j) {
-                    a &= ships.get(i).get(j).isHit();
+                boolean isSunk = true;
+                for (int j = 0; j < ships.get(i).size() && isSunk; ++j) {
+                    isSunk &= ships.get(i).get(j).isHit();
                 }
-                if (a) {
+                if (isSunk) {
                     result = SUNK;
                 }
             }
         }
         //check if all ships are sunk
-        boolean a = true;
-        for (int i = 0; i < ships.size() && a; ++i) {
-            for (int j = 0; j < ships.get(i).size() && a; ++j) {
-                a &= ships.get(i).get(j).isHit();
+        boolean isFinished = true;
+        for (int i = 0; i < ships.size() && isFinished; ++i) {
+            for (int j = 0; j < ships.get(i).size() && isFinished; ++j) {
+                isFinished &= ships.get(i).get(j).isHit();
             }
         }
-        if (a) {
+        if (isFinished) {
             result = FINISHED;
         }
         return result;
