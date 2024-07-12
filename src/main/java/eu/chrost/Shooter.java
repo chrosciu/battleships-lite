@@ -11,18 +11,6 @@ import static eu.chrost.Result.SUNK;
 
 public class Shooter {
 
-    public static class PointH {
-        public Field p;
-        public boolean h;
-
-        public static PointH of(Field p, boolean h) {
-            PointH pointH = new PointH();
-            pointH.p = p;
-            pointH.h = h;
-            return pointH;
-        }
-    }
-
     public static class Ship {
         private Field p;
         private int l;
@@ -50,7 +38,7 @@ public class Shooter {
 
     }
 
-    private List<List<PointH>> data = new ArrayList<>();
+    private List<List<ShipField>> data = new ArrayList<>();
 
     /**
      * Initialize shooter with given list of ships on board
@@ -60,12 +48,12 @@ public class Shooter {
      */
     public Shooter(List<Ship> input) {
         for (int i = 0; i < input.size(); ++i) {
-            List<PointH> list = new ArrayList<>();
+            List<ShipField> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(new Field(input.get(i).getP().x(), input.get(i).getP().y() + j), false));
+                    list.add(ShipField.of(new Field(input.get(i).getP().x(), input.get(i).getP().y() + j), false));
                 } else {
-                    list.add(PointH.of(new Field(input.get(i).getP().x() + j, input.get(i).getP().y()), false));
+                    list.add(ShipField.of(new Field(input.get(i).getP().x() + j, input.get(i).getP().y()), false));
                 }
             }
             data.add(list);
