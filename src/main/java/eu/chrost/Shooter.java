@@ -31,23 +31,30 @@ public class Shooter {
     public Result shoot(Field field) {
         var result = MISSED;
         for (var ship : ships) {
-            //iterate through all ship fields
-            for (int j = 0; j < ship.size(); ++j) {
-                if (ship.get(j).getField().equals(field)) {
-                    ship.get(j).markAsHit();
-                    result = HIT;
-                    break;
-                }
-            }
-            if (HIT == result) {
-                if (ship.isSunk()) {
-                    result = SUNK;
-                }
+            result = takeShotOnGivenShip(field, ship);
+            if (result != MISSED) {
                 break;
             }
         }
         if (areAllShipsSunk()) {
             result = FINISHED;
+        }
+        return result;
+    }
+
+    private Result takeShotOnGivenShip(Field field, Ship ship) {
+        var result = MISSED;
+        for (int j = 0; j < ship.size(); ++j) {
+            if (ship.get(j).getField().equals(field)) {
+                ship.get(j).markAsHit();
+                result = HIT;
+                break;
+            }
+        }
+        if (HIT == result) {
+            if (ship.isSunk()) {
+                result = SUNK;
+            }
         }
         return result;
     }
