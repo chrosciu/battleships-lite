@@ -13,17 +13,15 @@ public class Shooter {
     private List<List<ShipField>> data = new ArrayList<>();
 
     /**
-     * Initialize shooter with given list of ships on board
-     *
-     * @param input - list of ships. Each ship is described by first field coordinate, length and orientation
-     *
+     * Initialize shooter with given list of ship definitions
      */
-    public Shooter(List<ShipDefinition> input) {
-        for (int i = 0; i < input.size(); ++i) {
+    public Shooter(List<ShipDefinition> shipDefinitions) {
+        for (int i = 0; i < shipDefinitions.size(); ++i) {
             List<ShipField> list = new ArrayList<>();
-            for (int j = 0; j < input.get(i).length(); ++j) {
-                var firstField = input.get(i).firstField();
-                var orientation = input.get(i).orientation();
+            var shipDefinition = shipDefinitions.get(i);
+            for (int j = 0; j < shipDefinition.length(); ++j) {
+                var firstField = shipDefinition.firstField();
+                var orientation = shipDefinition.orientation();
                 var shiftedField = firstField.shift(j, orientation);
                 list.add(new ShipField(shiftedField));
             }
