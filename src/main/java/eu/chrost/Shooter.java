@@ -85,7 +85,7 @@ public class Shooter {
             //iterate through all ship fields
             for (int j = 0; j < data.get(i).size() && MISSED == result; ++j) {
                 //if any of ship fields is equal to passed field - mark as hit
-                if (data.get(i).get(j).p.x()== field.x() && data.get(i).get(j).p.y() == field.y()) {
+                if (data.get(i).get(j).p.equals(field)) {
                     data.get(i).get(j).h = true;
                     result = HIT;
                 }
