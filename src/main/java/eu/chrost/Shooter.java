@@ -17,15 +17,20 @@ public class Shooter {
      */
     public Shooter(List<ShipDefinition> shipDefinitions) {
         for (var shipDefinition : shipDefinitions) {
-            Ship ship = new Ship();
-            for (int j = 0; j < shipDefinition.length(); ++j) {
-                var firstField = shipDefinition.firstField();
-                var orientation = shipDefinition.orientation();
-                var shiftedField = firstField.shift(j, orientation);
-                ship.add(new ShipField(shiftedField));
-            }
+            Ship ship = buildShipFromDefinition(shipDefinition);
             ships.add(ship);
         }
+    }
+
+    private Ship buildShipFromDefinition(ShipDefinition shipDefinition) {
+        Ship ship = new Ship();
+        for (int j = 0; j < shipDefinition.length(); ++j) {
+            var firstField = shipDefinition.firstField();
+            var orientation = shipDefinition.orientation();
+            var shiftedField = firstField.shift(j, orientation);
+            ship.add(new ShipField(shiftedField));
+        }
+        return ship;
     }
 
     /**
