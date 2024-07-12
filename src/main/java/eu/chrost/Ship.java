@@ -5,12 +5,10 @@ public class Ship {
     private int l;
     private Orientation orientation;
 
-    public static Ship of(Field p, int l, Orientation orientation) {
-        Ship ship = new Ship();
-        ship.p = p;
-        ship.l = l;
-        ship.orientation = orientation;
-        return ship;
+    public Ship(Field p, int l, Orientation orientation) {
+        this.p = p;
+        this.l = l;
+        this.orientation = orientation;
     }
 
     public Field getP() {

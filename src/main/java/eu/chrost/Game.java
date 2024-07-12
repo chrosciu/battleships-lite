@@ -13,8 +13,8 @@ public class Game {
         //create empty ship list...
         List<Ship> rv = new ArrayList<>();
         //... and fill it with ships placed on board
-        rv.add(Ship.of(new Field(1, 1), 4, VERTICAL));
-        rv.add(Ship.of(new Field(6, 7), 2, HORIZONTAL));
+        rv.add(new Ship(new Field(1, 1), 4, VERTICAL));
+        rv.add(new Ship(new Field(6, 7), 2, HORIZONTAL));
         //let's start the game
         Shooter shooter = new Shooter(rv);
         Scanner keyboard = new Scanner(System.in);
