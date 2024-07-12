@@ -1,7 +1,10 @@
 package eu.chrost;
 
+import lombok.Getter;
+
 public class ShipField {
-    public Field field;
+    @Getter
+    private final Field field;
     public boolean hit;
 
     public ShipField(Field field, boolean hit) {
