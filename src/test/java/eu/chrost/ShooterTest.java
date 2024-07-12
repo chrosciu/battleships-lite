@@ -33,20 +33,20 @@ class ShooterTest {
     private static final int ONE_FIELD_SHIP_SIZE = 1;
     private static final int TWO_FIELDS_SHIP_SIZE = 2;
 
-    private static final Ship VERTICAL_TWO_FIELDS_SHIP =
-            new Ship(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, VERTICAL);
-    private static final Ship ONE_FIELD_SHIP =
-            new Ship(ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, HORIZONTAL);
-    private static final Ship ANOTHER_ONE_FIELD_SHIP =
-            new Ship(ANOTHER_ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, VERTICAL);
-    private static final Ship HORIZONTAL_TWO_FIELDS_SHIP =
-            new Ship(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, HORIZONTAL);
+    private static final ShipDefinition VERTICAL_TWO_FIELDS_SHIP =
+            new ShipDefinition(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, VERTICAL);
+    private static final ShipDefinition ONE_FIELD_SHIP =
+            new ShipDefinition(ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, HORIZONTAL);
+    private static final ShipDefinition ANOTHER_ONE_FIELD_SHIP =
+            new ShipDefinition(ANOTHER_ONE_FIELD_SHIP_FIELD, ONE_FIELD_SHIP_SIZE, VERTICAL);
+    private static final ShipDefinition HORIZONTAL_TWO_FIELDS_SHIP =
+            new ShipDefinition(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD, TWO_FIELDS_SHIP_SIZE, HORIZONTAL);
 
-    private static final List<Ship> BOARD_WITH_NO_SHIPS =
+    private static final List<ShipDefinition> BOARD_WITH_NO_SHIPS =
             List.of();
-    private static final List<Ship> BOARD_WITH_SINGLE_TWO_FIELDS_SHIP =
+    private static final List<ShipDefinition> BOARD_WITH_SINGLE_TWO_FIELDS_SHIP =
             List.of(VERTICAL_TWO_FIELDS_SHIP);
-    private static final List<Ship> BOARD_WITH_MULTIPLE_SHIPS =
+    private static final List<ShipDefinition> BOARD_WITH_MULTIPLE_SHIPS =
             List.of(VERTICAL_TWO_FIELDS_SHIP, ONE_FIELD_SHIP, ANOTHER_ONE_FIELD_SHIP, HORIZONTAL_TWO_FIELDS_SHIP);
 
     @Test
