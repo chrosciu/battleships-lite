@@ -1,0 +1,23 @@
+name: Maven Build and Test
+
+on:
+  push:
+    branches:
+      - conference
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      - name: Run tests
+        run: mvn test
