@@ -11,13 +11,6 @@ import static eu.chrost.Result.SUNK;
 
 class Shooter {
 
-    public static Point point(int x, int y) {
-        Point point = new Point();
-        point.x = x;
-        point.y = y;
-        return point;
-    }
-
     public static class PointH {
         public Point p;
         public boolean h;
@@ -81,9 +74,9 @@ class Shooter {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(point(input.get(i).getP().x, input.get(i).getP().y + j), false));
+                    list.add(PointH.of(Point.point(input.get(i).getP().x, input.get(i).getP().y + j), false));
                 } else {
-                    list.add(PointH.of(point(input.get(i).getP().x + j, input.get(i).getP().y), false));
+                    list.add(PointH.of(Point.point(input.get(i).getP().x + j, input.get(i).getP().y), false));
                 }
             }
             data.add(list);
