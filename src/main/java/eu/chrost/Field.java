@@ -3,7 +3,7 @@ package eu.chrost;
 import lombok.Value;
 
 @Value
-class Point {
+class Field {
     int x;
     int y;
 }
