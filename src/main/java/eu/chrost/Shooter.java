@@ -3,7 +3,7 @@ package eu.chrost;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shooter {
+class Shooter {
 
     public static class Point {
         public int x;
