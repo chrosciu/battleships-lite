@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Shooter.point;
 
 public class Game {
@@ -27,7 +28,7 @@ public class Game {
             var result = shooter.shoot(point(a, b));
             System.out.println(result);
             //if all ships sunk finish the game
-            if (Result.fromRank(3) == result) {
+            if (FINISHED == result) {
                 break;
             }
         }
