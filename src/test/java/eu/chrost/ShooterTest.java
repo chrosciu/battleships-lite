@@ -14,23 +14,22 @@ import static eu.chrost.Result.FINISHED;
 import static eu.chrost.Result.HIT;
 import static eu.chrost.Result.MISSED;
 import static eu.chrost.Result.SUNK;
-import static eu.chrost.Point.point;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class ShooterTest {
-    private static final Point VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD = point(3, 4);
-    private static final Point VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD = point(3, 5);
+    private static final Point VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD = new Point(3, 4);
+    private static final Point VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD = new Point(3, 5);
 
-    private static final Point ONE_FIELD_SHIP_FIELD = point(7, 2);
+    private static final Point ONE_FIELD_SHIP_FIELD = new Point(7, 2);
 
-    private static final Point ANOTHER_ONE_FIELD_SHIP_FIELD = point(6, 5);
+    private static final Point ANOTHER_ONE_FIELD_SHIP_FIELD = new Point(6, 5);
 
-    private static final Point HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD = point(1, 1);
-    private static final Point HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD = point(2, 1);
+    private static final Point HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD = new Point(1, 1);
+    private static final Point HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD = new Point(2, 1);
 
-    private static final Point FIELD_WITHOUT_SHIP = point(1, 2);
-    private static final Point ANOTHER_FIELD_WITHOUT_SHIP = point(4, 4);
+    private static final Point FIELD_WITHOUT_SHIP = new Point(1, 2);
+    private static final Point ANOTHER_FIELD_WITHOUT_SHIP = new Point(4, 4);
 
     private static final int ONE_FIELD_SHIP_SIZE = 1;
     private static final int TWO_FIELDS_SHIP_SIZE = 2;

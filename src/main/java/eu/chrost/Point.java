@@ -9,8 +9,8 @@ class Point {
     private final int x;
     private final int y;
 
-    public static Point point(int x, int y) {
-        Point point = new Point(x, y);
-        return point;
-    }
+//    public static Point point(int x, int y) {
+//        Point point = new Point(x, y);
+//        return point;
+//    }
 }

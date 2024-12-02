@@ -74,9 +74,9 @@ class Shooter {
             List<PointH> list = new ArrayList<>();
             for (int j = 0; j < input.get(i).getL(); ++j) {
                 if (input.get(i).getOrientation() == VERTICAL) {
-                    list.add(PointH.of(Point.point(input.get(i).getP().getX(), input.get(i).getP().getY() + j), false));
+                    list.add(PointH.of(new Point(input.get(i).getP().getX(), input.get(i).getP().getY() + j), false));
                 } else {
-                    list.add(PointH.of(Point.point(input.get(i).getP().getX() + j, input.get(i).getP().getY()), false));
+                    list.add(PointH.of(new Point(input.get(i).getP().getX() + j, input.get(i).getP().getY()), false));
                 }
             }
             data.add(list);
