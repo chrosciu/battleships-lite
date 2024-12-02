@@ -60,7 +60,7 @@ class ShooterTest {
         Shooter shooter = new Shooter(BOARD_WITH_NO_SHIPS);
 
         //when
-        int result = shooter.shoot(FIELD_WITHOUT_SHIP);
+        int result = shooter.shoot(FIELD_WITHOUT_SHIP).getRank();
 
         //then
         assertThat(result).isEqualTo(FINISHED);
@@ -74,7 +74,7 @@ class ShooterTest {
         @Test
         void returns_missed_status_on_first_shot_on_field_without_ship() {
             //when
-            int result = shooter.shoot(FIELD_WITHOUT_SHIP);
+            int result = shooter.shoot(FIELD_WITHOUT_SHIP).getRank();
 
             //then
             assertThat(result).isEqualTo(MISSED);
@@ -83,13 +83,13 @@ class ShooterTest {
         @Test
         void returns_hit_and_then_sunk_results_on_shot_on_all_ship_fields() {
             //when
-            int result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+            int result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD).getRank();
 
             //then
             assertThat(result).isEqualTo(HIT);
 
             //when
-            result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+            result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD).getRank();
 
             //then
             assertThat(result).isEqualTo(FINISHED);
@@ -102,67 +102,67 @@ class ShooterTest {
         Shooter shooter = new Shooter(BOARD_WITH_MULTIPLE_SHIPS);
 
         //when
-        int result = shooter.shoot(FIELD_WITHOUT_SHIP);
+        int result = shooter.shoot(FIELD_WITHOUT_SHIP).getRank();
 
         //then
         assertThat(result).isEqualTo(MISSED);
 
         //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(HIT);
 
         //when
-        result = shooter.shoot(ONE_FIELD_SHIP_FIELD);
+        result = shooter.shoot(ONE_FIELD_SHIP_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(SUNK);
 
         //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_FIRST_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(HIT);
 
         //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(SUNK);
 
         //when
-        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = shooter.shoot(VERTICAL_TWO_FIELDS_SHIP_SECOND_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(SUNK);
 
         //when
-        result = shooter.shoot(ANOTHER_ONE_FIELD_SHIP_FIELD);
+        result = shooter.shoot(ANOTHER_ONE_FIELD_SHIP_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(SUNK);
 
         //when
-        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(HIT);
 
         //when
-        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD);
+        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_SECOND_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(FINISHED);
 
         //when
-        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD);
+        result = shooter.shoot(HORIZONTAL_TWO_FIELDS_SHIP_FIRST_FIELD).getRank();
 
         //then
         assertThat(result).isEqualTo(FINISHED);
 
         //when
-        result = shooter.shoot(ANOTHER_FIELD_WITHOUT_SHIP);
+        result = shooter.shoot(ANOTHER_FIELD_WITHOUT_SHIP).getRank();
 
         //then
         assertThat(result).isEqualTo(FINISHED);
